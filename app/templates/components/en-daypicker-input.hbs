@@ -1,4 +1,14 @@
-<input value={{en-date-format date=date format="MMM D"}} id="en-daypicker-input" class="en-day-picker-input" type="text" name="daypicker">
+<input 
+  value={{en-date-format date=date format=format}} 
+  id="en-daypicker-input" 
+  class="en-daypicker-input" 
+  type="text" 
+  name="daypicker"
+>
+
+<div class="en-daypicker-calendar-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#77777" d="M15 2h-2V1c0-.6-.4-1-1-1h-1c-.6 0-1 .4-1 1v1H6V1c0-.6-.4-1-1-1H4c-.6 0-1 .4-1 1v1H1c-.6 0-1 .4-1 1v12c0 .6.4 1 1 1h14c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1zm-1 12H2V7h12v7z"/></svg>
+</div>
 
 {{#if isFocused}}
   {{en-daypicker

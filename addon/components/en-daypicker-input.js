@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['en-day-picker-wrapper'],
+  format: "MMM D",
 
   didInsertElement () {
     this._setup()
@@ -15,7 +16,7 @@ export default Ember.Component.extend({
     this._didFocus = this._didFocus.bind(this)
     this._didClickOutside = this._didClickOutside.bind(this)
 
-    let input = this.$('.en-day-picker-input')
+    let input = this.$('.en-daypicker-input')
     let doc = $(document)
 
     input.on('focus', this._didFocus)
@@ -23,7 +24,7 @@ export default Ember.Component.extend({
   },
 
   _destroy () {
-    let input = this.$('.en-day-picker-input')
+    let input = this.$('.en-daypicker-input')
     let doc = $(document)
 
     input.off('focus', this._didFocus)
@@ -36,7 +37,7 @@ export default Ember.Component.extend({
   },
 
   _didClickOutside (e) {
-    let input = $('.en-day-picker-input')
+    let input = $('.en-daypicker-input')
     let picker = $('.en-day-picker')
 
     let target = $(e.target)

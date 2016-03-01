@@ -115,8 +115,6 @@ export default Ember.Component.extend({
     },
 
     didSelectDate (day) {
-      console.log(day)
-      console.log(this.attrs)
       this.attrs['on-select'](day)
     }
   }
