@@ -1,0 +1,7 @@
+<input value={{en-date-format date=date format="MMM D"}} id="en-daypicker-input" class="en-day-picker-input" type="text" name="daypicker">
+
+{{#if isFocused}}
+  {{en-daypicker
+    on-select=(action attrs.on-select)
+    date=date}}
+{{/if}}

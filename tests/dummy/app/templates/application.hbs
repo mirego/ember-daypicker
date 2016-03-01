@@ -1,3 +1,5 @@
-<h2 id="title">Welcome to Ember</h2>
+<h3>{{date}}</h3>
 
-{{outlet}}
+{{en-daypicker-input
+  on-select=(action "onSelect")
+  date=date}}
