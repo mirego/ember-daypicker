@@ -1,7 +1,7 @@
 {
-  "name": "ember-day",
+  "name": "ember-daypicker",
   "version": "0.0.1",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "simple datepicker component for ember.js",
   "directories": {
     "doc": "doc",
     "test": "tests"
