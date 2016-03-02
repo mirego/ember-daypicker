@@ -5,7 +5,7 @@ external datepicker components.
 
 Here's how it looks:
 
-![image](https://cloud.githubusercontent.com/assets/1569205/13452682/39dc8e82-e070-11e5-93e3-9acee886f079.png)
+![image](https://cloud.githubusercontent.com/assets/1569205/13452682/39dc8e82-e070-11e5-93e3-9acee886f079.png =300x315)
 
 ## Installation
 
