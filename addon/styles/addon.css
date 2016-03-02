@@ -7,7 +7,7 @@ abbr {
 }
 
 .en-day-picker-wrapper {
-  display: inline;
+  display: inline-block;
   position: relative;
   font-family: -apple-system, BlinkMacSystemFont, 
     "Segoe UI", "Roboto", "Oxygen", 
@@ -39,7 +39,7 @@ abbr {
 .en-daypicker-calendar-icon {
   position: absolute;
   right: 10px;
-  top: 4px;
+  top: 7px;
 }
 
 input[type="text"].en-daypicker-input {
