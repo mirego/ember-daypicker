@@ -10,6 +10,8 @@ const {
 
 export default Ember.Component.extend({
   classNames: ['en-day-picker'],
+  attributeBindings: ['role'],
+  role: 'widget',
 
   date: moment(),
   today: moment(),

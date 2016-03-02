@@ -1,35 +1,40 @@
-<div class="en-daypicker-month">
-  {{month.name}} {{year}}
-</div>
-
-<div class="en-daypicker-actions">
-  <button {{action "previousMonth"}}>
-    <svg class="nc-icon glyph" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#e8e8e8" d="M11.1 15.7L3.4 8 11.1.3l1.5 1.4L6.3 8l6.3 6.3"/></svg>
-  </button>
-  
-  <button {{action "nextMonth"}}>
-    <svg class="nc-icon glyph" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#e8e8e8" d="M4.9 15.7l-1.5-1.4L9.7 8 3.4 1.7 4.9.3 12.6 8"/></svg>
-  </button>
-</div>
-
-<div class="en-daypicker-header">
-  {{#each-in weekDays as |abbr expanded|}}
-    <abbr class="en-daypicker-header-day" title="{{expanded}}">
-      {{abbr}}
-    </abbr>
-  {{/each-in}}
-</div>
-
-{{#each weeksArray as |week|}}
-  <div class="en-daypicker-week">
-    {{#each week as |day|}}
-      <div {{action "didSelectDate" day on="click" bubbles=false}}
-          class="en-daypicker-day 
-                {{unless (isThisMonth day=day month=month) 'is-disabled'}}
-                {{if (isThisDay day=day date=date) 'is-selected'}}
-                {{if (isThisDay day=day date=today) 'is-today'}}">
-        {{en-date-format date=day}}
-      </div>
-    {{/each}}
+<div class="en-daypicker-meta">
+  <div class="en-daypicker-month-name">
+    {{month.name}} {{year}}
   </div>
-{{/each}}
+  
+  <div class="en-daypicker-actions">
+    <button {{action "previousMonth"}}>
+      <svg class="nc-icon glyph" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16"><path fill="#fff" d="M11.1 15.7L3.4 8 11.1.3l1.5 1.4L6.3 8l6.3 6.3"/></svg>
+    </button>
+    
+    <button {{action "nextMonth"}}>
+      <svg class="nc-icon glyph" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16"><path fill="#fff" d="M4.9 15.7l-1.5-1.4L9.7 8 3.4 1.7 4.9.3 12.6 8"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="en-daypicker-month">
+
+  <div class="en-daypicker-header">
+    {{#each-in weekDays as |abbr expanded|}}
+      <div class="en-daypicker-header-day">
+        <abbr title="{{expanded}}">
+          {{abbr}}
+        </abbr>
+      </div>
+    {{/each-in}}
+  </div>
+
+  {{#each weeksArray as |week|}}
+    <div class="en-daypicker-week" role="row">
+      {{#each week as |day|}}
+        <div {{action "didSelectDate" day on="click" bubbles=false}}
+            role="gridcell"
+            class="en-daypicker-day {{unless (isThisMonth day=day month=month) 'is-disabled'}} {{if (isThisDay day=day date=date) 'is-selected'}} {{if (isThisDay day=day date=today) 'is-today'}}">
+          {{en-date-format date=day}}
+        </div>
+      {{/each}}
+    </div>
+  {{/each}}
+</div>

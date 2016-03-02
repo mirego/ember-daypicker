@@ -1,3 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+abbr {
+  border-bottom: 1px dotted #ccc;
+}
+
 .en-day-picker-wrapper {
   display: inline;
   position: relative;
@@ -8,9 +16,22 @@
 }
 
 .en-day-picker {
+  float: left;
+  background: white;
   position: absolute;
+  z-index: 999999999;
   left: 0;
   top: 32.5px;
+  border-radius: 4px;
+}
+
+.en-daypicker-meta {
+  display: inline-block;
+  width: 100%;
+  padding: 1em;
+  background-color: #2D2F35;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .en-daypicker-calendar-icon {
@@ -36,28 +57,67 @@ input[type="text"].en-daypicker-input:focus {
 
 .en-daypicker-week,
 .en-daypicker-header {
-  display: table-row-group;
+  display: table-row;
 }
 
-.en-daypicker-month {
+.en-daypicker-header {
+  font-weight: 600;
+}
+
+.en-daypicker-month-name {
   float: left;
+  padding: .25em 0;
+  color: #AEB1BF;
+  font-weight: 600;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
 }
 
 .en-daypicker-actions {
   float: right;
 }
 
+.en-daypicker-actions button {
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  padding: .5em;
+}
+
+.en-daypicker-actions button:hover {
+  background: #1E1F24;
+  cursor: pointer;
+}
+
+.en-daypicker-actions button:focus {
+  outline: thin #555;
+}
+
+.en-daypicker-month {
+  border-spacing: 0;
+  border-collapse: collapse;
+  display: table;
+}
+
 .en-daypicker-day,
 .en-daypicker-header-day {
   display: table-cell;
-  padding: .5em;
+  padding: .75em;
   text-align: center;
+  vertical-align: middle;
   font-size: 13px;
+  border: 1px solid #eee;
 }
 
 .en-daypicker-day:hover {
   cursor: pointer;
-  background: #f8f8f8;
+  background: #eee;
+  color: #777;
+}
+
+.en-daypicker-day:active {
+  background: #eee;
+  color: #777;
 }
 
 .en-daypicker-day.is-disabled {
@@ -66,13 +126,20 @@ input[type="text"].en-daypicker-input:focus {
   pointer-events: none;
 }
 
+.en-daypicker-day.is-disabled:hover {
+  cursor: not-allowed;
+}
+
 .en-daypicker-day.is-today {
   background-color: white;
-  color: red;
+  color: #FF3B3B;
   font-weight: 600;
+  -webkit-font-smoothing: antialiased;
 }
 
 .en-daypicker-day.is-selected {
-  background-color: #0878EE;
-  color: white
+  background-color: #4285F4;
+  color: white;
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
 }

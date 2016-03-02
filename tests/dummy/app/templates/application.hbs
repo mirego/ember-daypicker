@@ -1,6 +1,9 @@
-<h3>{{date}}</h3>
+<div class="en-daypicker-component">
+  {{en-daypicker-input
+    isFocused=true
+    on-select=(action "onSelect")
+    format="MMM D, YYYY"
+    date=date}}
 
-{{en-daypicker-input
-  on-select=(action "onSelect")
-  format="MMM D, YYYY"
-  date=date}}
+  <h6>{{date}}</h6>
+</div>
