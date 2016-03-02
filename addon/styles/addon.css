@@ -39,7 +39,7 @@ abbr {
 .en-daypicker-calendar-icon {
   position: absolute;
   right: 10px;
-  top: 1px;
+  top: 4px;
 }
 
 input[type="text"].en-daypicker-input {
