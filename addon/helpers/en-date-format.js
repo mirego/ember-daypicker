@@ -4,7 +4,11 @@ export function enDateFormat(params, hash) {
   let date = hash.date
   let format = hash.format || "D"
 
-  return moment(date).format(format);
+  if (moment(date).isValid()) {
+    return moment(date).format(format);
+  } else {
+    return null
+  }
 }
 
 export default Ember.Helper.helper(enDateFormat);

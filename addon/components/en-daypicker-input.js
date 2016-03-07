@@ -1,8 +1,27 @@
 import Ember from 'ember';
 
+const {
+  get: get,
+  set: set,
+  computed,
+  getProperties,
+  isEmpty
+} = Em
+
 export default Ember.Component.extend({
   classNames: ['en-day-picker-wrapper'],
+  isFocused: false,
   format: "MMM D",
+
+  dateFormatted: computed('date', function () {
+    let date = get(this, 'date')
+
+    if (isEmpty(date)) {
+      return moment()
+    } else {
+      return date
+    }
+  }),
 
   didInsertElement () {
     this._setup()
@@ -51,5 +70,12 @@ export default Ember.Component.extend({
     if (inputIsTarget || inputHasTarget || pickerIsTarget || pickerHasTarget) return
 
     this.set('isFocused', false)
+  },
+
+  actions: {
+    didSelect (date) {
+      this.set('isFocused', false)
+      this.attrs['on-select'](date)
+    }
   }
 });
