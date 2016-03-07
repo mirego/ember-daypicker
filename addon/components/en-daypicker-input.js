@@ -15,6 +15,7 @@ export default Ember.Component.extend({
 
   dateFormatted: computed('date', function () {
     let date = get(this, 'date')
+    console.log(date)
 
     if (isEmpty(date)) {
       return moment()

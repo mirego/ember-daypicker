@@ -1,7 +1,7 @@
 import Em from 'ember'
 
 export default Em.Controller.extend({
-  date: null,
+  date: undefined,
 
   actions: {
     onSelect (date) {
