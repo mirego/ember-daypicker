@@ -10,7 +10,7 @@ const {
 
 export default Ember.Component.extend({
   classNames: ['en-day-picker-wrapper'],
-  isFocused: false,
+  isFocused: true,
   format: "MMM D",
 
   dateFormatted: computed('date', function () {
@@ -57,7 +57,7 @@ export default Ember.Component.extend({
 
   _didClickOutside (e) {
     let input = $('.en-daypicker-input')
-    let picker = $('.en-day-picker')
+    let picker = $('.en-day-picker-wrapper')
 
     let target = $(e.target)
 
@@ -73,6 +73,10 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    focus () {
+      this.set('isFocused', true)
+    },
+
     didSelect (date) {
       this.set('isFocused', false)
       this.attrs['on-select'](date)
