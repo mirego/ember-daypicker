@@ -37,25 +37,33 @@ abbr {
   text-align: center;
 }
 
-.en-daypicker-calendar-icon {
-  position: absolute;
-  right: 10px;
-  top: 7px;
-}
-
-input[type="text"].en-daypicker-input {
-  box-sizing: border-box;
+.en-daypicker-input-wrapper {
+  padding-right: 10px;
   background-color: white;
   border-radius: 4px;
   border: 1px solid #e6e6e6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.en-daypicker-input-wrapper:hover {
+  cursor: pointer;
+  border-color: #4285F4
+}
+
+input[type="text"].en-daypicker-input {
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 16px;
   padding: 5px 10px;
   line-height: 1.5;
 }
 
-input[type="text"].en-daypicker-input:focus {
-  border-color: #4285F4
+input[type="text"].en-daypicker-input:hover {
+  cursor: pointer;
 }
 
 .en-daypicker-week,
@@ -148,8 +156,8 @@ input[type="text"].en-daypicker-input:focus {
 }
 
 .en-daypicker-day.is-selected {
-  background: #eee;
-  color: #777;
+  background: #4285f4;
+  color: #FFFFFF;
   font-weight: 600;
   -webkit-font-smoothing: antialiased;
 }
