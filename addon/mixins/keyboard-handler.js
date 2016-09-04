@@ -2,8 +2,8 @@ import Ember from 'ember';
 
 const { run } = Em
 
-const isFirstDayofWeek = (day) => day.index() === 0
-const isLastDayOfWeek  = (day) => day.index() === 6
+const isFirstDayofMonth = (day) => day.index() === 0
+const isLastDayOfMonth = (day) => day.index() === 6
 
 export default Ember.Mixin.create({
   didInsertElement () {
@@ -34,24 +34,25 @@ export default Ember.Mixin.create({
       return
     }
 
-    const key = ev.which || ev.keyCode 
-    const day = focused.data('daypicker-day')
+    const key   = ev.which || ev.keyCode
+    const label = focused.attr('aria-label')
+    const day   = moment(label, "MMM DD, YYYY")
 
     switch (key) {
       case 37:
-        this.focusPreviousDay(focused)
+        this.focusPreviousDay(day)
         break;
 
       case 38:
-        this.focusPreviousWeek(focused, day)
+        this.focusPreviousWeek(day)
         break;
 
       case 39:
-        this.focusNextDay(focused)
+        this.focusNextDay(day)
         break;
 
       case 40:
-        this.focusNextWeek(focused, day)
+        this.focusNextWeek(day)
         break;
 
       case 13:
@@ -63,51 +64,33 @@ export default Ember.Mixin.create({
     }
   },
 
-  focusPreviousDay (focused) {
-    if (focused && isFirstDayofWeek(focused)) {
-      this.focusPreviousWeek(focused, 6)
-    } else {
-      const prev = focused.prev()
-
-      if (!prev.hasClass('is-disabled')) {
-        prev.focus()
-      }
-    }
+  focusPreviousDay (day) {
+    const prev = day.subtract(1, 'day')
+    this.focusOn(prev)
   },
 
-  focusNextDay (focused) {
-    if (focused && isLastDayOfWeek(focused)) {
-      this.focusNextWeek(focused, 0)
-    } else {
-      const next = focused.next()
-
-      if (!next.hasClass('is-disabled')) {
-        next.focus()
-      }
-    }
+  focusNextDay (day) {
+    const next = day.add(1, 'day')
+    this.focusOn(next)
   },
 
-  focusPreviousWeek (focused, day) {
-    const previousWeek = focused.parent().prev()
-
-    if (focused) {
-      const previousWeekDay = previousWeek.find('.en-daypicker-day').eq(day)
-
-      if (previousWeekDay && !previousWeekDay.hasClass('is-disabled')) {
-        previousWeekDay.focus()
-      }
-    }
+  focusPreviousWeek (day) {
+    const prev = day.subtract(7, 'days')
+    this.focusOn(prev)
   },
 
-  focusNextWeek (focused, day) {
-    const nextWeek = focused.parent().next()
+  focusNextWeek (day) {
+    const next = day.add(7, 'days')
+    this.focusOn(next)
+  },
 
-    if (focused) {
-      const nextWeekDay = nextWeek.find('.en-daypicker-day').eq(day)
+  focusOn (day) {
+    const formatted = day.format("MMM DD, YYYY")
+    const dayDiv = this.$(`.en-daypicker-day[aria-label="${formatted}"]`)
 
-      if (nextWeekDay && !nextWeekDay.hasClass('is-disabled')) {
-        nextWeekDay.focus()
-      }
+    if (dayDiv && dayDiv.hasClass('is-active')) {
+      dayDiv.focus()
+      this.sendAction('on-focus', formatted)
     }
   },
 

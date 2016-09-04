@@ -98,97 +98,96 @@ const next  = $.Event('keydown', { keyCode: 39, which: 39})
 const prev  = $.Event('keydown', { keyCode: 37, which: 37})
 const enter = $.Event('keydown', { keyCode: 13, which: 13})
 
+const m = (d) => moment(d, "MMM DD, YYYY")
+
 test('when user hits next, it goes to the next date', function(assert) {
-  let today = moment().startOf('week').add(2, 'days') // Ensure it's never the end of the week
+  expect(2)
+
+  let today = m("Sep 15, 2016")
 
   this.set('today', today)
   this.on('on-select', _ => null)
 
+  this.on('on-focus', (day) => {
+    assert.ok(moment(day).isSame(m("Sep 16, 2016")), "got the next day to focus")
+  })
+
   this.render(hbs`{{en-daypicker 
               date=today
-              on-select=(action "on-select")}}`);
+              on-select=(action "on-select")
+              on-focus=(action "on-focus")}}`);
 
   const selected = this.$('.en-daypicker-day.is-selected')
   assert.equal(selected.text().trim(), today.format("D"), "has the right day by default")
 
-  const day = this.$('.en-daypicker-day:focus').data('daypicker-day')
-
-  run(() => {
-    selected.trigger(next)
-  })
-
-  console.log(day)
-
-  assert.equal(this.$('.en-daypicker-day:focus').data('daypicker-day'), day + 1, "goes to the next date")
-});
-
-test("when user hits next on the last day of the week, it goes to the next week's first day", function(assert) {
-  let endOfWeek = moment().endOf('week')
-
-  this.set('date', endOfWeek)
-  this.on('on-select', _ => null)
-
-  this.render(hbs`{{en-daypicker 
-              date=date
-              on-select=(action "on-select")}}`);
-
-  const selected = this.$('.en-daypicker-day.is-selected')
-  assert.equal(selected.text().trim(), endOfWeek.format("D"), "has the right day by default")
-
-  const day = this.$('.en-daypicker-day:focus').data('daypicker-day')
-
-  run(() => {
-    selected.trigger(next)
-  })
-
-  const focused = this.$('.en-daypicker-day:focus')
-
-  assert.equal(focused.text().trim(), endOfWeek.add(1, 'day').format("D"), "goes to the right day")
-  assert.equal(focused.data('daypicker-day'), 0, "goes to the right element")
+  run(_ => selected.trigger(next))
 });
 
 test('when user hits prev, it goes to the previous date', function(assert) {
-  let today = moment().startOf('week').add(2, 'days') // Ensure it's never the start of the week
+  expect(2)
+
+  let today = m("Sep 15, 2016")
 
   this.set('today', today)
   this.on('on-select', _ => null)
 
+  this.on('on-focus', (day) => {
+    assert.ok(moment(day).isSame(m("Sep 14, 2016")), "got the pevious day to focus")
+  })
+
   this.render(hbs`{{en-daypicker 
               date=today
-              on-select=(action "on-select")}}`);
+              on-select=(action "on-select")
+              on-focus=(action "on-focus")}}`);
 
   const selected = this.$('.en-daypicker-day.is-selected')
   assert.equal(selected.text().trim(), today.format("D"), "has the right day by default")
 
-  const day = this.$('.en-daypicker-day:focus').data('daypicker-day')
-
-  run(() => {
-    selected.trigger(prev)
-  })
-
-  assert.equal(this.$('.en-daypicker-day:focus').data('daypicker-day'), day - 1, "goes to the previous date")
+  run(_ => selected.trigger(prev))
 });
 
-test("when user hits previous on the first day of the week, it goes to the previous week's last day", function(assert) {
-  let startOfWeek = moment().startOf('week')
+test('when user hits up, it goes to the previous week', function(assert) {
+  expect(2)
 
-  this.set('date', startOfWeek)
+  let today = m("Sep 15, 2016")
+
+  this.set('today', today)
   this.on('on-select', _ => null)
 
-  this.render(hbs`{{en-daypicker 
-              date=date
-              on-select=(action "on-select")}}`);
-
-  const selected = this.$('.en-daypicker-day.is-selected')
-  assert.equal(selected.text().trim(), startOfWeek.format("D"), "has the right day by default")
-
-  const day = this.$('.en-daypicker-day:focus').data('daypicker-day')
-
-  run(() => {
-    selected.trigger(prev)
+  this.on('on-focus', (day) => {
+    assert.ok(moment(day).isSame(m("Sep 8, 2016"), "got the pevious week to focus"))
   })
 
-  const focused = this.$('.en-daypicker-day:focus')
-  assert.equal(focused.text().trim(), startOfWeek.subtract(1, 'day').format("D"), "goes to the right day")
-  assert.equal(focused.data('daypicker-day'), 6, "goes to the right element")
+  this.render(hbs`{{en-daypicker 
+              date=today
+              on-select=(action "on-select")
+              on-focus=(action "on-focus")}}`);
+
+  const selected = this.$('.en-daypicker-day.is-selected')
+  assert.equal(selected.text().trim(), today.format("D"), "has the right day by default")
+
+  run(_ => selected.trigger(up))
+});
+
+test('when user hits down, it goes to the next week', function(assert) {
+  expect(2)
+
+  let today = m("Sep 15, 2016")
+
+  this.set('today', today)
+  this.on('on-select', _ => null)
+
+  this.on('on-focus', (day) => {
+    assert.ok(moment(day).isSame(m("Sep 22, 2016"), "got the next week to focus"))
+  })
+
+  this.render(hbs`{{en-daypicker 
+              date=today
+              on-select=(action "on-select")
+              on-focus=(action "on-focus")}}`);
+
+  const selected = this.$('.en-daypicker-day.is-selected')
+  assert.equal(selected.text().trim(), today.format("D"), "has the right day by default")
+
+  run(_ => selected.trigger(down))
 });
