@@ -30,7 +30,7 @@
           <div {{action "didSelectDate" day on="click" bubbles=false}}
               tabindex=0
               role="gridcell"
-              aria-label="{{en-date-format date=day format='MMM DD, YYYY'}}"
+              aria-label="{{en-date-format date=day format=defaultFormat}}"
               aria-disabled="{{if (isThisMonth day=day month=month) 'false' 'true'}}"
               data-daypicker-day="{{en-date-format date=day format="e"}}"
               class="en-daypicker-day 

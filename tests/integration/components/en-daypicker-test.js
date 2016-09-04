@@ -1,5 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import Constants from 'ember-day/utils/constants'
 
 const { run, run: { later }} = Em
 
@@ -98,7 +99,7 @@ const next  = $.Event('keydown', { keyCode: 39, which: 39})
 const prev  = $.Event('keydown', { keyCode: 37, which: 37})
 const enter = $.Event('keydown', { keyCode: 13, which: 13})
 
-const m = (d) => moment(d, "MMM DD, YYYY")
+const m = (d) => moment(d, Constants.defaultFormat)
 
 test('when user hits next, it goes to the next date', function(assert) {
   expect(2)

@@ -15,6 +15,8 @@ export default Ember.Component.extend(KeyboardHandler, {
   attributeBindings: ['role'],
   role: 'widget',
 
+  defaultFormat: Constants.defaultFormat,
+
   date: moment(),
   today: moment(),
 

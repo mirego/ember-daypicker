@@ -1,9 +1,7 @@
 import Ember from 'ember';
+import Constants from 'ember-day/utils/constants';
 
 const { run } = Em
-
-const isFirstDayofMonth = (day) => day.index() === 0
-const isLastDayOfMonth = (day) => day.index() === 6
 
 export default Ember.Mixin.create({
   didInsertElement () {
@@ -36,7 +34,7 @@ export default Ember.Mixin.create({
 
     const key   = ev.which || ev.keyCode
     const label = focused.attr('aria-label')
-    const day   = moment(label, "MMM DD, YYYY")
+    const day   = moment(label, Constants.defaultFormat)
 
     switch (key) {
       case 37:
@@ -71,6 +69,7 @@ export default Ember.Mixin.create({
 
   focusNextDay (day) {
     const next = day.add(1, 'day')
+
     this.focusOn(next)
   },
 
@@ -85,7 +84,9 @@ export default Ember.Mixin.create({
   },
 
   focusOn (day) {
-    const formatted = day.format("MMM DD, YYYY")
+    const formatted = day.format(Constants.defaultFormat)
+
+    const dayDivs = this.$('.en-daypicker-day:not(.is-disabled)')
     const dayDiv = this.$(`.en-daypicker-day[aria-label="${formatted}"]`)
 
     if (dayDiv && !dayDiv.hasClass('is-disabled')) {
