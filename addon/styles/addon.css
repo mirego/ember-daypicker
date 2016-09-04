@@ -24,6 +24,7 @@ abbr {
   left: 0;
   top: 32.5px;
   border-radius: 4px;
+  box-shadow: 0 1px 0 1px #F7F7F7;
 }
 
 .en-daypicker-meta {
@@ -133,8 +134,9 @@ input[type="text"].en-daypicker-input:hover {
 }
 
 .en-daypicker-day {
-  font-size: 13px;
   transition: background-color .25s ease-in-out;
+  font-size: 13px;
+  border-radius: 1px;
 }
 
 .en-daypicker-day:hover {

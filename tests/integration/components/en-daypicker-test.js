@@ -191,3 +191,111 @@ test('when user hits down, it goes to the next week', function(assert) {
 
   run(_ => selected.trigger(down))
 });
+
+/*
+ * Disabling days works
+ */
+
+test("it can disable dates after a given maxDate", function (assert) {
+  let today = m("Sep 1, 2016")
+  let nextWeek = today.clone().add(6, 'days')
+
+  this.set('today', today)
+  this.set('nextWeek', nextWeek)
+
+  this.render(hbs`{{en-daypicker
+              maxDate=nextWeek
+              date=today}}`);
+
+  let active = this.$('.en-daypicker-day:not(.is-disabled)')
+  assert.equal(active.length, 7, "has 7 active days")
+
+  let firstDayAfterMax = this.$('.en-daypicker-day[aria-label="Sep 08, 2016"]')
+  assert.ok(firstDayAfterMax.hasClass('is-disabled'), "first day after max has disabled class")
+
+  run(() => {
+    this.$('.en-daypicker-action-next').click()
+  })
+
+  active = this.$('.en-daypicker-day:not(.is-disabled)')
+  assert.equal(active.length, 0, "has no active days in the next month")
+})
+
+test("it can disable dates before a given minDate", function (assert) {
+  let today = m("Sep 7, 2016")
+  let nextWeek = today.clone().add(6, 'days')
+
+  this.set('today', today)
+  this.set('nextWeek', nextWeek)
+  console.log(nextWeek)
+
+  this.render(hbs`{{en-daypicker
+              minDate=nextWeek
+              date=today}}`);
+
+  let active = this.$('.en-daypicker-day:not(.is-disabled)')
+  assert.equal(active.length, 18, "has 18 active days")
+
+  let lastDay = this.$('.en-daypicker-day[aria-label="Sep 12, 2016"]')
+  assert.ok(lastDay.hasClass('is-disabled'), "last minDate has the disabled class")
+
+  let firstDayAfterMin= this.$('.en-daypicker-day[aria-label="Sep 13, 2016"]')
+  assert.notOk(firstDayAfterMin.hasClass('is-disabled'), "first day after max does not have disabled class")
+})
+
+test("it does not allow selecting disabled dates after max", function (assert) {
+  expect(1)
+
+  let today = m("Sep 1, 2016")
+  let nextWeek = today.clone().add(6, 'days')
+
+  this.set('today', today)
+  this.set('nextWeek', nextWeek)
+
+  this.on('on-select', (date) => {
+    assert.ok(moment(date).isSame(m("Sep 07, 2016"), 'day'), 'got the right day')
+  })
+
+  this.render(hbs`{{en-daypicker
+              maxDate=nextWeek
+              date=today
+              on-select=(action "on-select")}}`);
+
+  run(() => {
+    this.$('.en-daypicker-day[aria-label="Sep 07, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 08, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 10, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 12, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 15, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 21, 2016"]').click()
+  })
+})
+
+test("it does not allow selecting disabled dates before min", function (assert) {
+  expect(1)
+
+  let today = m("Sep 1, 2016")
+  let nextWeek = today.clone().add(6, 'days')
+
+  this.set('today', today)
+  this.set('nextWeek', nextWeek)
+
+  this.on('on-select', (date) => {
+    assert.ok(moment(date).isSame(m("Sep 07, 2016"), 'day'), 'got the right day')
+  })
+
+  this.render(hbs`{{en-daypicker
+              minDate=nextWeek
+              date=today
+              on-select=(action "on-select")}}`);
+
+  run(() => {
+    this.$('.en-daypicker-day[aria-label="Sep 01, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 02, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 03, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 04, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 05, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 06, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 07, 2016"]').click()
+  })
+})

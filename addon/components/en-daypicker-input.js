@@ -10,7 +10,7 @@ const {
 
 export default Ember.Component.extend({
   classNames: ['en-day-picker-wrapper'],
-  isFocused: true,
+  isFocused: false,
   format: "MMM D",
 
   dateFormatted: computed('date', function () {

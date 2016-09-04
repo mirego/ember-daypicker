@@ -3,8 +3,8 @@ import Constants from '../utils/constants'
 import KeyboardHandler from '../mixins/keyboard-handler'
 
 const {
-  get: get,
-  set: set,
+  get,
+  set,
   computed,
   getProperties,
   run
@@ -105,7 +105,7 @@ export default Ember.Component.extend(KeyboardHandler, {
 
   actions: {
     nextMonth () {
-      let date = this.get('date')
+      let date = get(this, 'date')
       let nextMonth = date.clone().add(1, 'month').startOf('month')
 
       this.set('date', nextMonth)
@@ -115,7 +115,7 @@ export default Ember.Component.extend(KeyboardHandler, {
     },
 
     previousMonth () {
-      let date = this.get('date')
+      let date = get(this, 'date')
       let previousMonth = date.clone().subtract(1, 'month').startOf('month')
 
       this.set('date', previousMonth)
@@ -125,6 +125,11 @@ export default Ember.Component.extend(KeyboardHandler, {
     },
 
     didSelectDate (day) {
+      const { minDate, maxDate } = getProperties(this, 'minDate', 'maxDate')
+
+      if (minDate && day.isBefore(minDate)) return
+      if (maxDate && day.isAfter(maxDate)) return
+
       this.focusSelected()
       this.attrs['on-select'](day)
     }

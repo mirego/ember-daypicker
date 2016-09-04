@@ -33,7 +33,12 @@
               aria-label="{{en-date-format date=day format='MMM DD, YYYY'}}"
               aria-disabled="{{if (isThisMonth day=day month=month) 'false' 'true'}}"
               data-daypicker-day="{{en-date-format date=day format="e"}}"
-              class="en-daypicker-day {{if (isThisMonth day=day month=month) 'is-active' 'is-disabled'}} {{if (isThisDay day=day date=date) 'is-selected'}} {{if (isThisDay day=day date=today) 'is-today'}}">
+              class="en-daypicker-day 
+                {{unless (isThisMonth day=day month=month) 'is-disabled'}}
+                {{if (isAfterDate day=day date=maxDate) 'is-disabled'}}
+                {{if (isBeforeDate day=day date=minDate) 'is-disabled'}}
+                {{if (isThisDay day=day date=date) 'is-selected'}}
+                {{if (isThisDay day=day date=today) 'is-today'}}">
             {{en-date-format date=day}}
           </div>
         {{/each}}

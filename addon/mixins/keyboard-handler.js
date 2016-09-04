@@ -88,7 +88,7 @@ export default Ember.Mixin.create({
     const formatted = day.format("MMM DD, YYYY")
     const dayDiv = this.$(`.en-daypicker-day[aria-label="${formatted}"]`)
 
-    if (dayDiv && dayDiv.hasClass('is-active')) {
+    if (dayDiv && !dayDiv.hasClass('is-disabled')) {
       dayDiv.focus()
       this.sendAction('on-focus', formatted)
     }
