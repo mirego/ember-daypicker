@@ -9,6 +9,7 @@ abbr {
 .en-day-picker-wrapper {
   display: inline-block;
   position: relative;
+  -webkit-font-smoothing: antialiased;
   font-family: -apple-system, BlinkMacSystemFont, 
     "Segoe UI", "Roboto", "Oxygen", 
     "Ubuntu", "Cantarell", "Fira Sans", 
@@ -71,10 +72,6 @@ input[type="text"].en-daypicker-input:hover {
   display: table-row;
 }
 
-.en-daypicker-header {
-  font-weight: 600;
-}
-
 .en-daypicker-action {
   background: transparent;
   border: none;
@@ -109,22 +106,35 @@ input[type="text"].en-daypicker-input:hover {
   font-weight: 600;
 }
 
-.en-daypicker-month {
+.en-daypicker-month-wrapper {
   border: 1px solid #eee;
   border-top: 0;
   border-spacing: 0;
   border-collapse: collapse;
+  padding: 6px;
+}
+
+.en-daypicker-month {
   display: table;
+  padding: 6px;
 }
 
 .en-daypicker-day,
 .en-daypicker-header-day {
   display: table-cell;
-  padding: .65em;
+  padding: .75em .5em;
   text-align: center;
   vertical-align: middle;
+}
+
+.en-daypicker-header-day {
   font-size: 13px;
-  border-radius: 999em;
+  font-weight: 500;
+}
+
+.en-daypicker-day {
+  font-size: 13px;
+  transition: background-color .25s ease-in-out;
 }
 
 .en-daypicker-day:hover {

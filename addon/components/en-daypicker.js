@@ -1,14 +1,16 @@
 import Ember from 'ember'
 import Constants from '../utils/constants'
+import KeyboardHandler from '../mixins/keyboard-handler'
 
 const {
   get: get,
   set: set,
   computed,
-  getProperties
+  getProperties,
+  run
 } = Em
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(KeyboardHandler, {
   classNames: ['en-day-picker'],
   attributeBindings: ['role'],
   role: 'widget',
@@ -107,6 +109,9 @@ export default Ember.Component.extend({
       let nextMonth = date.clone().add(1, 'month').startOf('month')
 
       this.set('date', nextMonth)
+      run.next(() => {
+        this.focusSelected()
+      })
     },
 
     previousMonth () {
@@ -114,9 +119,13 @@ export default Ember.Component.extend({
       let previousMonth = date.clone().subtract(1, 'month').startOf('month')
 
       this.set('date', previousMonth)
+      run.next(() => {
+        this.focusSelected()
+      })
     },
 
     didSelectDate (day) {
+      this.focusSelected()
       this.attrs['on-select'](day)
     }
   }

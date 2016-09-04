@@ -1,12 +1,12 @@
 export default {
   weekdays: {
-    "Su": "Sunday",
-    "Mo": "Monday",
-    "Tu": "Tuesday",
-    "We": "Wednesday",
-    "Th": "Thursday",
-    "Fr": "Friday",
-    "Sa": "Saturday"
+    "Sun": "Sunday",
+    "Mon": "Monday",
+    "Tue": "Tuesday",
+    "Wed": "Wednesday",
+    "Thu": "Thursday",
+    "Fri": "Friday",
+    "Sat": "Saturday"
   },
 
   months: ["January", "February", "March", "April", "May", "June",
