@@ -1,17 +1,21 @@
 import Ember from 'ember'
 import Constants from '../utils/constants'
+import KeyboardHandler from '../mixins/keyboard-handler'
 
 const {
-  get: get,
-  set: set,
+  get,
+  set,
   computed,
-  getProperties
+  getProperties,
+  run
 } = Em
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(KeyboardHandler, {
   classNames: ['en-day-picker'],
   attributeBindings: ['role'],
   role: 'widget',
+
+  defaultFormat: Constants.defaultFormat,
 
   date: moment(),
   today: moment(),
@@ -103,20 +107,32 @@ export default Ember.Component.extend({
 
   actions: {
     nextMonth () {
-      let date = this.get('date')
+      let date = get(this, 'date')
       let nextMonth = date.clone().add(1, 'month').startOf('month')
 
       this.set('date', nextMonth)
+      run.next(() => {
+        this.focusSelected()
+      })
     },
 
     previousMonth () {
-      let date = this.get('date')
+      let date = get(this, 'date')
       let previousMonth = date.clone().subtract(1, 'month').startOf('month')
 
       this.set('date', previousMonth)
+      run.next(() => {
+        this.focusSelected()
+      })
     },
 
     didSelectDate (day) {
+      const { minDate, maxDate } = getProperties(this, 'minDate', 'maxDate')
+
+      if (minDate && day.isBefore(minDate)) return
+      if (maxDate && day.isAfter(maxDate)) return
+
+      this.focusSelected()
       this.attrs['on-select'](day)
     }
   }

@@ -12,26 +12,37 @@
   </button>
 </div>
 
-<div class="en-daypicker-month">
-  <div class="en-daypicker-header">
-    {{#each-in weekDays as |abbr expanded|}}
-      <div class="en-daypicker-header-day">
-        <abbr title="{{expanded}}">
-          {{abbr}}
-        </abbr>
-      </div>
-    {{/each-in}}
-  </div>
-
-  {{#each weeksArray as |week|}}
-    <div class="en-daypicker-week" role="row">
-      {{#each week as |day|}}
-        <div {{action "didSelectDate" day on="click" bubbles=false}}
-            role="gridcell"
-            class="en-daypicker-day {{unless (isThisMonth day=day month=month) 'is-disabled'}} {{if (isThisDay day=day date=date) 'is-selected'}} {{if (isThisDay day=day date=today) 'is-today'}}">
-          {{en-date-format date=day}}
+<div class="en-daypicker-month-wrapper">
+  <div class="en-daypicker-month">
+    <div class="en-daypicker-header">
+      {{#each-in weekDays as |abbr expanded|}}
+        <div class="en-daypicker-header-day">
+          <abbr title="{{expanded}}">
+            {{abbr}}
+          </abbr>
         </div>
-      {{/each}}
+      {{/each-in}}
     </div>
-  {{/each}}
+
+    {{#each weeksArray as |week|}}
+      <div class="en-daypicker-week" role="row">
+        {{#each week as |day|}}
+          <div {{action "didSelectDate" day on="click" bubbles=false}}
+              tabindex=0
+              role="gridcell"
+              aria-label="{{en-date-format date=day format=defaultFormat}}"
+              aria-disabled="{{if (isThisMonth day=day month=month) 'false' 'true'}}"
+              data-daypicker-day="{{en-date-format date=day format="e"}}"
+              class="en-daypicker-day 
+                {{unless (isThisMonth day=day month=month) 'is-disabled'}}
+                {{if (isAfterDate day=day date=maxDate) 'is-disabled'}}
+                {{if (isBeforeDate day=day date=minDate) 'is-disabled'}}
+                {{if (isThisDay day=day date=date) 'is-selected'}}
+                {{if (isThisDay day=day date=today) 'is-today'}}">
+            {{en-date-format date=day}}
+          </div>
+        {{/each}}
+      </div>
+    {{/each}}
+  </div>
 </div>

@@ -1,7 +1,7 @@
 # ember-daypicker
 
 ember-daypicker is a simple datepicker component for ember.js. It's built using moment.js; there are no
-external datepicker components.
+external datepicker libraries. There's basic keyboard support, too.
 
 Here's how it looks:
 
@@ -28,6 +28,13 @@ be sent back to you.
 Optionally, you can also provide the `format` attribute that will control how the selected
 date gets shown in the input field. By default, it is `MMM D` which would be something like
 `Mar 10`.
+
+You can disable dates before or after a certain date by passing in the `minDate` or
+the `maxDate` attributes.
+
+Last, you can provide the `placeholder` attribute to change the placeholder text that the datepicker
+input displays. You can also use the `isFocused` attribute to decide whether the datepicker
+is shown by default or not.
 
 ## Questions? Bugs?
 
