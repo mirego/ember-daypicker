@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { run } = Em
+
 const isFirstDayofWeek = (day) => day.index() === 0
 const isLastDayOfWeek  = (day) => day.index() === 6
 
@@ -12,16 +14,22 @@ export default Ember.Mixin.create({
     const selected = this.$('.is-selected')
 
     if (selected) {
-      Em.run(() => {
+      run(() => {
         selected.focus()
       })
     }
   },
 
   keyDown (ev) {
+    run(() => {
+      this.handleKeyDown(ev)
+    })
+  },
+
+  handleKeyDown (ev) {
     const focused = this.$('.en-daypicker-day:focus')
 
-    if (!focused) {
+    if (!focused || !focused.length) {
       console.warn('[en-daypicker] Could not find the focused day')
       return
     }
