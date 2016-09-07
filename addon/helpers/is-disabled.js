@@ -2,33 +2,32 @@ import Ember from 'ember';
 
 export function isDisabled(params, hash) {
   let { day, disabler, month, max, min } = hash
-  let disabled = false
 
   if (!day) {
-    disabled = true
+    return true
   }
 
   if (month && day.month() !== month.index) {
-    disabled = true
+    return true
   }
 
   if (max && min && (day.isAfter(max) || day.isBefore(min))) {
-    disabled = true
+    return true
   }
 
   if (max && day.isAfter(max)) {
-    disabled = true
+    return true
   }
 
   if (min && day.isBefore(min)) {
-    disabled = true
+    return true
   }
 
-  if (!!disabled && typeof disabled === "function") {
-    disabled = disabler(day)
+  if (!!disabler && typeof disabler === "function" && disabler(day)) {
+    return true
   }
 
-  return disabled
+  return false
 }
 
 export default Ember.Helper.helper(isDisabled);
