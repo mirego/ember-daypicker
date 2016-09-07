@@ -15,6 +15,7 @@
 
 {{#if isFocused}}
   {{en-daypicker
+    disableFn=disableFn
     maxDate=maxDate
     minDate=minDate
     on-select=(action "didSelect")

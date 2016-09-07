@@ -18,6 +18,11 @@ export default Ember.Component.extend({
 
     if (isEmpty(date)) {
       return moment()
+
+    } else if (!moment.isMoment(date) || !date.isValid()) {
+      console.warn(`[ember-day] You need to pass in a valid moment object. You passed in ${date}, which is invalid, so we're defaulting to today's date`)
+      return moment()
+
     } else {
       return date
     }
@@ -75,6 +80,7 @@ export default Ember.Component.extend({
   actions: {
     focus () {
       this.set('isFocused', true)
+      this.attrs['on-focus']
     },
 
     didSelect (date) {

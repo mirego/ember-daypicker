@@ -73,6 +73,11 @@ input[type="text"].en-daypicker-input:hover {
   display: table-row;
 }
 
+.en-daypicker-header {
+  border-right: 1px solid #e9ecf1;
+  border-left: 1px solid #e9ecf1;
+}
+
 .en-daypicker-action {
   background: transparent;
   border: none;
@@ -91,12 +96,12 @@ input[type="text"].en-daypicker-input:hover {
 
 .en-daypicker-action-prev {
   float: left;
-  border-right: 1px solid #eee;
+  border-right: 1px solid #e9ecf1;
 }
 
 .en-daypicker-action-next {
   float: right;
-  border-left: 1px solid #eee;
+  border-left: 1px solid #e9ecf1;
 }
 
 .en-daypicker-month-name {
@@ -108,11 +113,9 @@ input[type="text"].en-daypicker-input:hover {
 }
 
 .en-daypicker-month-wrapper {
-  border: 1px solid #eee;
   border-top: 0;
   border-spacing: 0;
   border-collapse: collapse;
-  padding: 6px;
 }
 
 .en-daypicker-month {
@@ -136,17 +139,18 @@ input[type="text"].en-daypicker-input:hover {
 .en-daypicker-day {
   transition: background-color .25s ease-in-out;
   font-size: 13px;
+  border: 1px solid #e9ecf1;
   border-radius: 1px;
 }
 
 .en-daypicker-day:hover {
   cursor: pointer;
-  background: #eee;
+  background: #e9ecf1;
   color: #777;
 }
 
 .en-daypicker-day:active {
-  background: #eee;
+  background: #e9ecf1;
   color: #777;
 }
 
