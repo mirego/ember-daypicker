@@ -310,14 +310,14 @@ test("it allows disabling any day", function (assert) {
   this.set('today', today)
   this.set('nextWeek', nextWeek)
 
-  this.set('disablerFn', (date) => {
+  this.set('disableFn', (date) => {
     return date.day() === 6 // Disable Saturdays
   })
 
   this.on('on-select', (date) => null)
 
   this.render(hbs`{{en-daypicker
-              disablerFn=disablerFn
+              disableFn=disableFn
               date=today
               on-select=(action "on-select")}}`);
 

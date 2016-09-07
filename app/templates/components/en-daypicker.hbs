@@ -31,10 +31,10 @@
               tabindex=0
               role="gridcell"
               aria-label="{{en-date-format date=day format=defaultFormat}}"
-              aria-disabled="{{if (isDisabled day=day disabler=disablerFn month=month max=maxDate min=minDate) 'is-disabled'}}"
+              aria-disabled="{{if (isDisabled day=day disabler=disableFn month=month max=maxDate min=minDate) 'is-disabled'}}"
               data-daypicker-day="{{en-date-format date=day format="e"}}"
               class="en-daypicker-day 
-                {{if (isDisabled day=day disabler=disablerFn month=month max=maxDate min=minDate) 'is-disabled'}}
+                {{if (isDisabled day=day disabler=disableFn month=month max=maxDate min=minDate) 'is-disabled'}}
                 {{if (isThisDay day=day date=date) 'is-selected'}}
                 {{if (isThisDay day=day date=today) 'is-today'}}">
             {{en-date-format date=day}}
