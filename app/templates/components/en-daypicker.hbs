@@ -3,9 +3,9 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16"><path fill="#777" d="M11.1 15.7L3.4 8 11.1.3l1.5 1.4L6.3 8l6.3 6.3"/></svg>
   </button>
 
-  <div class="en-daypicker-month-name">
+  <caption class="en-daypicker-month-name">
     {{month.name}} {{year}}
-  </div>
+  </caption>
 
   <button class="en-daypicker-action en-daypicker-action-next" {{action "nextMonth"}}>
     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16"><path fill="#777" d="M4.9 15.7l-1.5-1.4L9.7 8 3.4 1.7 4.9.3 12.6 8"/></svg>
@@ -31,12 +31,10 @@
               tabindex=0
               role="gridcell"
               aria-label="{{en-date-format date=day format=defaultFormat}}"
-              aria-disabled="{{if (isThisMonth day=day month=month) 'false' 'true'}}"
+              aria-disabled="{{if (isDisabled day=day disabler=disablerFn month=month max=maxDate min=minDate) 'is-disabled'}}"
               data-daypicker-day="{{en-date-format date=day format="e"}}"
               class="en-daypicker-day 
-                {{unless (isThisMonth day=day month=month) 'is-disabled'}}
-                {{if (isAfterDate day=day date=maxDate) 'is-disabled'}}
-                {{if (isBeforeDate day=day date=minDate) 'is-disabled'}}
+                {{if (isDisabled day=day disabler=disablerFn month=month max=maxDate min=minDate) 'is-disabled'}}
                 {{if (isThisDay day=day date=date) 'is-selected'}}
                 {{if (isThisDay day=day date=today) 'is-today'}}">
             {{en-date-format date=day}}

@@ -75,6 +75,7 @@ export default Ember.Component.extend({
   actions: {
     focus () {
       this.set('isFocused', true)
+      this.attrs['on-focus']
     },
 
     didSelect (date) {

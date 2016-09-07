@@ -300,3 +300,36 @@ test("it does not allow selecting disabled dates before min", function (assert) 
     this.$('.en-daypicker-day[aria-label="Sep 07, 2016"]').click()
   })
 })
+
+test("it allows disabling any day", function (assert) {
+  expect(4)
+
+  let today = m("Sep 1, 2016")
+  let nextWeek = today.clone().add(6, 'days')
+
+  this.set('today', today)
+  this.set('nextWeek', nextWeek)
+
+  this.set('disablerFn', (date) => {
+    return date.day() === 6 // Disable Saturdays
+  })
+
+  this.on('on-select', (date) => null)
+
+  this.render(hbs`{{en-daypicker
+              disablerFn=disablerFn
+              date=today
+              on-select=(action "on-select")}}`);
+
+  run(() => {
+    this.$('.en-daypicker-day[aria-label="Sep 03, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 10, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 17, 2016"]').click()
+    this.$('.en-daypicker-day[aria-label="Sep 24, 2016"]').click()
+  })
+
+  assert.ok(this.$('.en-daypicker-day[aria-label="Sep 03, 2016"]').hasClass("is-disabled"))
+  assert.ok(this.$('.en-daypicker-day[aria-label="Sep 10, 2016"]').hasClass("is-disabled"))
+  assert.ok(this.$('.en-daypicker-day[aria-label="Sep 17, 2016"]').hasClass("is-disabled"))
+  assert.ok(this.$('.en-daypicker-day[aria-label="Sep 24, 2016"]').hasClass("is-disabled"))
+})
