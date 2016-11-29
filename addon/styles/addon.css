@@ -16,6 +16,11 @@ abbr {
     "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
+.en-day-picker-wrapper.is-disabled {
+  opacity: .5;
+  pointer-events: none
+}
+
 .en-day-picker {
   float: left;
   background: white;
@@ -81,7 +86,7 @@ input[type="text"].en-daypicker-input:hover {
 .en-daypicker-action {
   background: transparent;
   border: none;
-  padding: 1em 1.5em;
+  padding: .5em 1.5em;
 }
 
 .en-daypicker-action:hover {

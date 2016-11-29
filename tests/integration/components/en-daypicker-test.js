@@ -21,7 +21,7 @@ test('it renders with the initial date value', function(assert) {
 });
 
 test('it renders the right dates', function(assert) {
-  expect(3)
+  assert.expect(3)
 
   let today = moment()
   this.set('today', today)
@@ -41,7 +41,7 @@ test('it renders the right dates', function(assert) {
 });
 
 test('it has the right today', function(assert) {
-  expect(2)
+  assert.expect(2)
 
   let today = moment()
   this.set('today', today)
@@ -102,7 +102,7 @@ const enter = $.Event('keydown', { keyCode: 13, which: 13})
 const m = (d) => moment(d, Constants.defaultFormat)
 
 test('when user hits next, it goes to the next date', function(assert) {
-  expect(2)
+  assert.expect(2)
 
   let today = m("Sep 15, 2016")
 
@@ -125,7 +125,7 @@ test('when user hits next, it goes to the next date', function(assert) {
 });
 
 test('when user hits prev, it goes to the previous date', function(assert) {
-  expect(2)
+  assert.expect(2)
 
   let today = m("Sep 15, 2016")
 
@@ -148,7 +148,7 @@ test('when user hits prev, it goes to the previous date', function(assert) {
 });
 
 test('when user hits up, it goes to the previous week', function(assert) {
-  expect(2)
+  assert.expect(2)
 
   let today = m("Sep 15, 2016")
 
@@ -171,7 +171,7 @@ test('when user hits up, it goes to the previous week', function(assert) {
 });
 
 test('when user hits down, it goes to the next week', function(assert) {
-  expect(2)
+  assert.expect(2)
 
   let today = m("Sep 15, 2016")
 
@@ -245,7 +245,7 @@ test("it can disable dates before a given minDate", function (assert) {
 })
 
 test("it does not allow selecting disabled dates after max", function (assert) {
-  expect(1)
+  assert.expect(1)
 
   let today = m("Sep 1, 2016")
   let nextWeek = today.clone().add(6, 'days')
@@ -273,7 +273,7 @@ test("it does not allow selecting disabled dates after max", function (assert) {
 })
 
 test("it does not allow selecting disabled dates before min", function (assert) {
-  expect(1)
+  assert.expect(1)
 
   let today = m("Sep 1, 2016")
   let nextWeek = today.clone().add(6, 'days')
@@ -302,7 +302,7 @@ test("it does not allow selecting disabled dates before min", function (assert) 
 })
 
 test("it allows disabling any day", function (assert) {
-  expect(4)
+  assert.expect(4)
 
   let today = m("Sep 1, 2016")
   let nextWeek = today.clone().add(6, 'days')

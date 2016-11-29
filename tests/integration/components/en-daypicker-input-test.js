@@ -78,7 +78,7 @@ test("placeholder works", function (assert) {
 })
 
 test("on selecting a date, it sends the on-select action", function (assert) {
-  expect(1)
+  assert.expect(1)
 
   let today = moment()
   this.set('today', today)

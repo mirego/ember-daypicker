@@ -10,6 +10,10 @@ const {
 
 export default Ember.Component.extend({
   classNames: ['en-day-picker-wrapper'],
+  classNameBindings: ['isDisabled:is-disabled'],
+
+  isDisabled: false,
+
   isFocused: false,
   format: "MMM D",
 

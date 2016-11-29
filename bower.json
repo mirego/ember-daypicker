@@ -1,17 +1,7 @@
 {
-  "name": "ember-day",
+  "name": "ember-daypicker",
   "dependencies": {
-    "ember": "beta",
-    "ember-cli-shims": "0.0.6",
-    "ember-cli-test-loader": "0.2.1",
-    "ember-data": "beta",
-    "ember-load-initializers": "0.1.7",
-    "ember-qunit": "0.4.16",
-    "ember-qunit-notifications": "0.1.0",
-    "ember-resolver": "~0.1.20",
-    "jquery": "1.11.3",
-    "loader.js": "ember-cli/loader.js#3.2.1",
-    "qunit": "~1.20.0",
-    "moment": "~2.11.2"
+    "ember": "~2.9.0",
+    "ember-cli-shims": "0.1.3"
   }
 }
