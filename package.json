@@ -1,7 +1,7 @@
 {
   "name": "ember-daypicker",
   "version": "0.3.1",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "A simple daypicker for ember.js without any external dependencies.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -42,7 +42,9 @@
     "loader.js": "^4.0.10"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "ember daypicker",
+    "daypicker"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.7"
