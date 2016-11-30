@@ -1,5 +1,4 @@
 [![npm version](https://badge.fury.io/js/ember-daypicker.svg)](https://badge.fury.io/js/ember-daypicker)
-[![CircleCI](https://circleci.com/gh/swastik/ember-day.svg?style=svg)](https://circleci.com/gh/swastik/ember-day)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-daypicker.svg)](https://emberobserver.com/addons/ember-daypicker)
 
 # ember-daypicker
