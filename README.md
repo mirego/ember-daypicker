@@ -6,7 +6,7 @@
 ember-daypicker is a simple datepicker component for ember.js. It's built using moment.js; there are no
 external datepicker libraries. There's basic keyboard support, too.
 
-[Here's an introduction to it (with examples)](http://swastik.github.io/ember-daypicker/).
+[Here's an introduction to it (with examples)](http://enlist.github.io/ember-daypicker/).
 
 ## Installation
 
