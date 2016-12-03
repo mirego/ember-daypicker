@@ -13,11 +13,14 @@
     </p>
 
     <div>
-      {{en-daypicker-input
-        on-select=(action "onSelect")
+      {{en-rangepicker-input
         format="MMM D, YYYY"
         placeholder="Select a date"
-        date=date}}
+        start=start
+        end=end
+        on-select-start=(action (mut start))
+        on-select-end=(action (mut end))
+      }}
     </div>
 
     {{#if date}}

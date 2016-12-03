@@ -3,6 +3,7 @@ import Constants from '../utils/constants'
 import KeyboardHandler from '../mixins/keyboard-handler'
 
 const {
+  Component,
   get,
   set,
   computed,
@@ -10,10 +11,13 @@ const {
   run
 } = Em
 
-export default Ember.Component.extend(KeyboardHandler, {
+export default Component.extend(KeyboardHandler, {
   classNames: ['en-day-picker'],
   attributeBindings: ['role'],
   role: 'widget',
+
+  canGoToNextMonth: true,
+  canGoToLastMonth: true,
 
   defaultFormat: Constants.defaultFormat,
 

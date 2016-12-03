@@ -1,0 +1,39 @@
+<div class="en-range-wrapper" onclick={{action (mut isFocused) true}}>
+  <span class="en-range-start">
+    {{#if start}}
+      {{en-date-format date=start format=format}}
+    {{else}}
+      Start
+    {{/if}}
+  </span>
+
+  <span class="en-range-separator">
+    &rarr;
+  </span>
+
+  <span class="en-range-end">
+    {{#if end}}
+      {{en-date-format date=end format=format}}
+    {{else}}
+      End
+    {{/if}}
+  </span>
+</div>
+
+{{#if isFocused}}
+  {{en-daypicker
+    class="range-start"
+    disableFn=disableFn
+    canGoToNextMonth=false
+    on-select=(action "didSelect" "start")
+    date=startFormatted}}
+
+  {{en-daypicker
+    class="range-end"
+    disableFn=disableFn
+    maxDate=maxDate
+    minDate=start
+    canGoToLastMonth=false
+    on-select=(action "didSelect" "end")
+    date=endFormatted}}
+{{/if}}

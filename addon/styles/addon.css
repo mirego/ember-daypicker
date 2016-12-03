@@ -21,15 +21,26 @@ abbr {
   pointer-events: none
 }
 
+.en-daypicker-label {
+  background-color: #eee;
+  padding: 3px 6px;
+  font-size: 12px;
+}
+
 .en-day-picker {
   float: left;
   background: white;
   position: absolute;
-  z-index: 999999999;
+  z-index: 9999;
   left: 0;
   top: 32.5px;
   border-radius: 4px;
   box-shadow: 0 1px 0 1px #F7F7F7;
+}
+
+.en-day-picker.range-end {
+  z-index: 10000;
+  left: 270px;
 }
 
 .en-daypicker-meta {
@@ -181,4 +192,24 @@ input[type="text"].en-daypicker-input:hover {
   color: #FFFFFF;
   font-weight: 600;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Range Picker
+ */
+
+.en-range-wrapper {
+  display: block;
+  border-radius: 4px;
+  border: 1px solid #e9ecf1;
+}
+
+.en-range-start,
+.en-range-end {
+  display: inline-block;
+  padding: 6px 12px;
+}
+
+.en-range-wrapper:hover {
+  cursor: pointer;
+  background-color: #f8f9fa;
 }
