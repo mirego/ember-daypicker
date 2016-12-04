@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import Constants from 'ember-day/utils/constants';
 
-const { run } = Em
+const { Mixin, run } = Em
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   didInsertElement () {
     this.focusSelected()
   },
@@ -69,7 +69,6 @@ export default Ember.Mixin.create({
 
   focusNextDay (day) {
     const next = day.add(1, 'day')
-
     this.focusOn(next)
   },
 

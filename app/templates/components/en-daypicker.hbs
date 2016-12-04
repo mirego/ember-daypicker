@@ -1,16 +1,9 @@
-<div class="en-daypicker-meta">
-  <button class="en-daypicker-action en-daypicker-action-prev" {{action "previousMonth"}}>
-    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16"><path fill="#777" d="M11.1 15.7L3.4 8 11.1.3l1.5 1.4L6.3 8l6.3 6.3"/></svg>
-  </button>
-
-  <caption class="en-daypicker-month-name">
-    {{month.name}} {{year}}
-  </caption>
-
-  <button class="en-daypicker-action en-daypicker-action-next" {{action "nextMonth"}}>
-    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16"><path fill="#777" d="M4.9 15.7l-1.5-1.4L9.7 8 3.4 1.7 4.9.3 12.6 8"/></svg>
-  </button>
-</div>
+{{en-daypicker-header
+  month=month
+  year=year
+  previousMonth=(action "previousMonth")
+  nextMonth=(action "nextMonth")
+}}
 
 <div class="en-daypicker-month-wrapper">
   <div class="en-daypicker-month">

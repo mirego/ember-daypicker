@@ -25,7 +25,7 @@ export default Ember.Component.extend(KeyboardHandler, {
       let moments = Constants.months
       let index = get(this, 'date').month()
 
-      return { 
+      return {
         name: moments[index],
         index: index
       }

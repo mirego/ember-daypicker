@@ -1,16 +1,27 @@
 import Ember from 'ember';
+import DocumentEvent from 'ember-day/mixins/document-event';
+import isOutsideClick from 'ember-day/utils/is-outside-click';
 
 const {
-  get: get,
-  set: set,
+  Component,
+  get,
+  set,
   computed,
   getProperties,
-  isEmpty
+  isEmpty,
+  run
 } = Em
 
-export default Ember.Component.extend({
+export default Component.extend(DocumentEvent, {
   classNames: ['en-day-picker-wrapper'],
   classNameBindings: ['isDisabled:is-disabled'],
+  documentEvents: ['click'],
+
+  onDocumentClick (e) {
+    if (isOutsideClick(this.element, e.target)) {
+      this.set('isFocused', false)
+    }
+  },
 
   isDisabled: false,
 
@@ -24,7 +35,8 @@ export default Ember.Component.extend({
       return moment()
 
     } else if (!moment.isMoment(date) || !date.isValid()) {
-      console.warn(`[ember-day] You need to pass in a valid moment object. You passed in ${date}, which is invalid, so we're defaulting to today's date`)
+      console.warn(`[ember-day] You need to pass in a valid moment object.
+You passed in ${date}, which is invalid, so we're defaulting to today's date`)
       return moment()
 
     } else {
@@ -33,30 +45,22 @@ export default Ember.Component.extend({
   }),
 
   didInsertElement () {
-    this._setup()
+    this._super(...arguments)
+    run.scheduleOnce('afterRender', () => this._setup())
   },
 
   willDestroyElement () {
+    this._super(...arguments)
     this._destroy()
   },
 
   _setup () {
     this._didFocus = this._didFocus.bind(this)
-    this._didClickOutside = this._didClickOutside.bind(this)
-
-    let input = this.$('.en-daypicker-input')
-    let doc = $(document)
-
-    input.on('focus', this._didFocus)
-    doc.on('click', this._didClickOutside)
+    this.$('.en-daypicker-input').on('focus', this._didFocus)
   },
 
   _destroy () {
-    let input = this.$('.en-daypicker-input')
-    let doc = $(document)
-
-    input.off('focus', this._didFocus)
-    doc.off('click', this._didClickOutside)
+    this.$('.en-daypicker-input').off('focus', this._didFocus)
   },
 
   _didFocus (e) {
@@ -64,32 +68,19 @@ export default Ember.Component.extend({
     this.sendAction('on-focus')
   },
 
-  _didClickOutside (e) {
-    let input = $('.en-daypicker-input')
-    let picker = $('.en-day-picker-wrapper')
-
-    let target = $(e.target)
-
-    let inputIsTarget = input.is(target)
-    let pickerIsTarget = picker.is(target)
-
-    let inputHasTarget = input.has(target).length > 0
-    let pickerHasTarget = picker.has(target).length > 0
-
-    if (inputIsTarget || inputHasTarget || pickerIsTarget || pickerHasTarget) return
-
-    this.set('isFocused', false)
-  },
-
   actions: {
     focus () {
-      this.set('isFocused', true)
-      this.attrs['on-focus']
+      run(() => {
+        this.set('isFocused', true)
+        this.attrs['on-focus']
+      })
     },
 
     didSelect (date) {
-      this.set('isFocused', false)
-      this.attrs['on-select'](date)
+      run(() => {
+        this.set('isFocused', false)
+        this.attrs['on-select'](date)
+      })
     }
   }
 });
