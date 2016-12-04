@@ -3,12 +3,19 @@
     &larr;
   </button>
 
-  <caption class="en-daypicker-month-name">
-    {{month.name}} {{year}}
+  <caption class="en-daypicker-current-month">
+    <span class="en-daypicker-meta-month">
+      {{month.name}}
+    </span>
+
+    <select value={{year}} class="en-daypicker-meta-year" name="en-daypicker-year-select" onchange={{action attrs.changeYear value="target.value"}}>
+      {{#each years as |item|}}
+        <option selected={{is-equal year item}} value="{{item}}">{{item}}</option>
+      {{/each}}
+    </select>
   </caption>
 
   <button class="en-daypicker-action en-daypicker-action-next" onclick={{action attrs.nextMonth}}>
     &rarr;
   </button>
 </div>
-

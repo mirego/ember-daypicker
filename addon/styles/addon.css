@@ -101,20 +101,34 @@ input[type="text"].en-daypicker-input:hover {
 
 .en-daypicker-action-prev {
   float: left;
-  border-right: 1px solid #e9ecf1;
+  border-radius: 0;
+  padding: .5em;
 }
 
 .en-daypicker-action-next {
   float: right;
-  border-left: 1px solid #e9ecf1;
+  border-radius: 0;
+  padding: .5em;
 }
 
-.en-daypicker-month-name {
+.en-daypicker-current-month {
   display: inline-block;
   text-align: center;
-  padding: .65em;
+  padding: .65em 0;
   font-size: 14px;
   font-weight: 600;
+}
+
+.en-daypicker-meta-year,
+.en-daypicker-meta-month {
+  padding: 1px;
+}
+
+.en-daypicker-meta-year {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  background: transparent;
 }
 
 .en-daypicker-month-wrapper {
@@ -177,8 +191,37 @@ input[type="text"].en-daypicker-input:hover {
 }
 
 .en-daypicker-day.is-selected {
-  background: #4285f4;
+  background-color: #4285f4;
   color: #FFFFFF;
   font-weight: 600;
   -webkit-font-smoothing: antialiased;
+}
+
+.en-daypicker-year-chooser {
+  user-select: none;
+  background: #f8f9fa;
+  padding: 6px 12px;
+  border: 1px solid #e6e6e6;
+  border-top: none;
+}
+
+.en-daypicker-year-chooser h6 {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding-left: 6px;
+}
+
+.en-daypicker-year-chooser-item {
+  padding: 3px 6px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 4px;
+  color: #2b323d;
+}
+
+.en-daypicker-year-chooser-item:hover {
+  cursor: pointer;
+  background: #4285f4;
+  color: #FFFFFF;
 }

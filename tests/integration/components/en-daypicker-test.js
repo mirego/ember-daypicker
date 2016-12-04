@@ -2,10 +2,20 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Constants from 'ember-day/utils/constants'
 
+import daypicker from '../../pages/en-daypicker'
+
 const { run, run: { later }} = Em
 
 moduleForComponent('en-daypicker', 'Integration | Component | en daypicker', {
-  integration: true
+  integration: true,
+
+  beforeEach() {
+    daypicker.setContext(this);
+  },
+
+  afterEach() {
+    daypicker.removeContext();
+  }
 });
 
 test('it renders with the initial date value', function(assert) {
@@ -14,10 +24,12 @@ test('it renders with the initial date value', function(assert) {
 
   this.set('nextMonth', nextMonth)
 
-  this.render(hbs`{{en-daypicker 
+  daypicker
+    .render(hbs`{{en-daypicker 
               date=nextMonth}}`);
 
-  assert.equal(this.$('.en-daypicker-month-name').text().trim(), nextMonth.format("MMMM YYYY"));
+  assert.equal(daypicker.month, nextMonth.format("MMMM"))
+  assert.equal(daypicker.year, nextMonth.format("YYYY"))
 });
 
 test('it renders the right dates', function(assert) {
@@ -26,18 +38,16 @@ test('it renders the right dates', function(assert) {
   let today = moment()
   this.set('today', today)
 
-  this.render(hbs`{{en-daypicker 
+  daypicker.render(hbs`{{en-daypicker 
               date=today}}`);
 
-  const daysCount = today.daysInMonth()
-  const daypickerDay = this.$('.en-daypicker-day').not('.is-disabled')
-
+  const daysCount    = today.daysInMonth()
   const startOfMonth = today.startOf('month').day()
-  const endOfMonth = today.endOf('month').day()
+  const endOfMonth   = today.endOf('month').day()
 
-  assert.equal(daypickerDay.length, daysCount, "has the right number of days enabled")
-  assert.equal(daypickerDay.first().data('daypicker-day'), startOfMonth, "has the right start")
-  assert.equal(daypickerDay.last().data('daypicker-day'), endOfMonth, "has the right end")
+  assert.equal(daypicker.days().count, daysCount, "has the right number of days enabled")
+  assert.equal(daypicker.days(0).daypickerDay, startOfMonth, "has the right start")
+  assert.equal(daypicker.days(daysCount - 1).daypickerDay, endOfMonth, "has the right end")
 });
 
 test('it has the right today', function(assert) {
@@ -46,13 +56,11 @@ test('it has the right today', function(assert) {
   let today = moment()
   this.set('today', today)
 
-  this.render(hbs`{{en-daypicker 
+  daypicker.render(hbs`{{en-daypicker 
               date=today}}`);
 
-  const todayDiv = this.$('.is-today')
-
-  assert.equal(todayDiv.length, 1)
-  assert.equal(todayDiv.text().trim(), today.format("D"))
+  assert.ok(daypicker.hasToday)
+  assert.equal(daypicker.today, today.format("D"))
 });
 
 test('when the date updates later, it updates the rest', function(assert) {
@@ -61,15 +69,17 @@ test('when the date updates later, it updates the rest', function(assert) {
 
   this.set('nextMonth', nextMonth)
 
-  this.render(hbs`{{en-daypicker 
+  daypicker.render(hbs`{{en-daypicker 
               date=nextMonth}}`);
 
-  assert.equal(this.$('.en-daypicker-month-name').text().trim(), nextMonth.format("MMMM YYYY"));
+  assert.equal(daypicker.month, nextMonth.format("MMMM"))
+  assert.equal(daypicker.year, nextMonth.format("YYYY"))
 
   let nextMonthAgain = today.clone().add(3, 'month')
   this.set('nextMonth', nextMonthAgain)
 
-  assert.equal(this.$('.en-daypicker-month-name').text().trim(), nextMonthAgain.format("MMMM YYYY"));
+  assert.equal(daypicker.month, nextMonthAgain.format("MMMM"))
+  assert.equal(daypicker.year, nextMonthAgain.format("YYYY"))
 });
 
 test('when a date is clicked upon, it sends the on-select action', function(assert) {
@@ -82,27 +92,17 @@ test('when a date is clicked upon, it sends the on-select action', function(asse
     assert.ok(moment.isMoment(day), 'is a moment object')
   })
 
-  this.render(hbs`{{en-daypicker 
+  daypicker.render(hbs`{{en-daypicker 
               date=nextMonth
               on-select=(action "on-select")}}`);
 
-  this.$('.en-daypicker-day:not(.is-disabled):not(.is-selected):first').click()
+  daypicker.days(0).click()
 });
-
-/*
- * KEYBOARD EVENTS
-*/
-
-const down  = $.Event('keydown', { keyCode: 40, which: 40})
-const up    = $.Event('keydown', { keyCode: 38, which: 38})
-const next  = $.Event('keydown', { keyCode: 39, which: 39})
-const prev  = $.Event('keydown', { keyCode: 37, which: 37})
-const enter = $.Event('keydown', { keyCode: 13, which: 13})
 
 const m = (d) => moment(d, Constants.defaultFormat)
 
 test('when user hits next, it goes to the next date', function(assert) {
-  assert.expect(2)
+  assert.expect(1)
 
   let today = m("Sep 15, 2016")
 
@@ -113,19 +113,16 @@ test('when user hits next, it goes to the next date', function(assert) {
     assert.ok(moment(day).isSame(m("Sep 16, 2016")), "got the next day to focus")
   })
 
-  this.render(hbs`{{en-daypicker 
+  daypicker.render(hbs`{{en-daypicker 
               date=today
               on-select=(action "on-select")
               on-focus=(action "on-focus")}}`);
 
-  const selected = this.$('.en-daypicker-day.is-selected')
-  assert.equal(selected.text().trim(), today.format("D"), "has the right day by default")
-
-  run(_ => selected.trigger(next))
+  daypicker.days(0).next()
 });
 
 test('when user hits prev, it goes to the previous date', function(assert) {
-  assert.expect(2)
+  assert.expect(1)
 
   let today = m("Sep 15, 2016")
 
@@ -136,19 +133,16 @@ test('when user hits prev, it goes to the previous date', function(assert) {
     assert.ok(moment(day).isSame(m("Sep 14, 2016")), "got the pevious day to focus")
   })
 
-  this.render(hbs`{{en-daypicker 
+  daypicker.render(hbs`{{en-daypicker 
               date=today
               on-select=(action "on-select")
               on-focus=(action "on-focus")}}`);
 
-  const selected = this.$('.en-daypicker-day.is-selected')
-  assert.equal(selected.text().trim(), today.format("D"), "has the right day by default")
-
-  run(_ => selected.trigger(prev))
+  daypicker.days(0).prev()
 });
 
 test('when user hits up, it goes to the previous week', function(assert) {
-  assert.expect(2)
+  assert.expect(1)
 
   let today = m("Sep 15, 2016")
 
@@ -159,19 +153,16 @@ test('when user hits up, it goes to the previous week', function(assert) {
     assert.ok(moment(day).isSame(m("Sep 8, 2016"), "got the pevious week to focus"))
   })
 
-  this.render(hbs`{{en-daypicker 
+  daypicker.render(hbs`{{en-daypicker 
               date=today
               on-select=(action "on-select")
               on-focus=(action "on-focus")}}`);
 
-  const selected = this.$('.en-daypicker-day.is-selected')
-  assert.equal(selected.text().trim(), today.format("D"), "has the right day by default")
-
-  run(_ => selected.trigger(up))
+  daypicker.days(0).up()
 });
 
 test('when user hits down, it goes to the next week', function(assert) {
-  assert.expect(2)
+  assert.expect(1)
 
   let today = m("Sep 15, 2016")
 
@@ -182,15 +173,12 @@ test('when user hits down, it goes to the next week', function(assert) {
     assert.ok(moment(day).isSame(m("Sep 22, 2016"), "got the next week to focus"))
   })
 
-  this.render(hbs`{{en-daypicker 
+  daypicker.render(hbs`{{en-daypicker 
               date=today
               on-select=(action "on-select")
               on-focus=(action "on-focus")}}`);
 
-  const selected = this.$('.en-daypicker-day.is-selected')
-  assert.equal(selected.text().trim(), today.format("D"), "has the right day by default")
-
-  run(_ => selected.trigger(down))
+  daypicker.days(0).down()
 });
 
 /*
@@ -332,4 +320,37 @@ test("it allows disabling any day", function (assert) {
   assert.ok(this.$('.en-daypicker-day[aria-label="Sep 10, 2016"]').hasClass("is-disabled"))
   assert.ok(this.$('.en-daypicker-day[aria-label="Sep 17, 2016"]').hasClass("is-disabled"))
   assert.ok(this.$('.en-daypicker-day[aria-label="Sep 24, 2016"]').hasClass("is-disabled"))
+})
+
+test("it allows changing year", function (assert) {
+  assert.expect(1)
+
+  let today = m("Sep 1, 2016")
+
+  this.set('today', today)
+
+  this.on('on-select', (date) => {
+    assert.equal(date.year(), 1960, 'gets the right year')
+  })
+
+  this.render(hbs`{{en-daypicker
+              date=today
+              on-select=(action "on-select")}}`);
+
+  run(() => {
+    this.$('.en-daypicker-meta-year').click()
+
+    this.$('.en-daypicker-meta-year')
+      .find('option:eq(10)')
+      .prop('selected', true)
+      .trigger('change')
+  })
+
+  run(() => {
+    this.$('.en-daypicker-day')
+      .not('.is-disabled')
+      .not('.is-selected')
+      .eq(0)
+      .click()
+  })
 })

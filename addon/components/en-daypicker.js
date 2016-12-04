@@ -106,6 +106,12 @@ export default Ember.Component.extend(KeyboardHandler, {
   weekDays: Constants.weekdays,
 
   actions: {
+    changeYear (year) {
+      let date = get(this, 'date')
+      let next = date.clone().year(year)
+      set(this, 'date', next)
+    },
+
     nextMonth () {
       let date = get(this, 'date')
       let nextMonth = date.clone().add(1, 'month').startOf('month')
