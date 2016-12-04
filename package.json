@@ -1,7 +1,7 @@
 {
   "name": "ember-daypicker",
   "version": "0.3.1",
-  "description": "A simple daypicker for ember.js without any external dependencies.",
+  "description": "A simple datepicker for ember.js without any external dependencies.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -44,8 +44,10 @@
   },
   "keywords": [
     "ember-addon",
+    "ember datepicker",
     "ember daypicker",
-    "daypicker"
+    "datepicker",
+    "ember calendar"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.7"
