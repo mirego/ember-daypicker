@@ -94,7 +94,6 @@ input[type="text"].en-daypicker-input:hover {
   cursor: pointer;
 }
 
-
 .en-daypicker-action:focus {
   outline: thin solid #4285F4;
 }
@@ -159,13 +158,14 @@ input[type="text"].en-daypicker-input:hover {
   transition: background-color .25s ease-in-out;
   font-size: 13px;
   border: 1px solid #e9ecf1;
+  color: rgba(0, 0, 0, 0.8);
   border-radius: 1px;
 }
 
 .en-daypicker-day:hover {
   cursor: pointer;
   background: #e9ecf1;
-  color: #777;
+  color: black;
 }
 
 .en-daypicker-day:active {
