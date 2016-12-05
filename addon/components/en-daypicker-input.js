@@ -44,30 +44,6 @@ You passed in ${date}, which is invalid, so we're defaulting to today's date`)
     }
   }),
 
-  didInsertElement () {
-    this._super(...arguments)
-    run.scheduleOnce('afterRender', () => this._setup())
-  },
-
-  willDestroyElement () {
-    this._super(...arguments)
-    this._destroy()
-  },
-
-  _setup () {
-    this._didFocus = this._didFocus.bind(this)
-    this.$('.en-daypicker-input').on('focus', this._didFocus)
-  },
-
-  _destroy () {
-    this.$('.en-daypicker-input').off('focus', this._didFocus)
-  },
-
-  _didFocus (e) {
-    this.set('isFocused', true)
-    this.sendAction('on-focus')
-  },
-
   actions: {
     focus () {
       run(() => {

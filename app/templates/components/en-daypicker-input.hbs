@@ -1,4 +1,4 @@
-<div onclick={{action "focus"}} class="en-daypicker-input-wrapper">
+<div class="en-daypicker-input-wrapper">
   <input
     value={{en-date-format date=date format=format}} 
     readonly
@@ -8,6 +8,7 @@
     class="en-daypicker-input"
     type="text" 
     name="daypicker"
+    onfocus={{action "focus"}}
     >
 
   <div class="en-daypicker-calendar-icon">
