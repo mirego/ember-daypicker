@@ -1,6 +1,6 @@
 {
   "name": "ember-daypicker",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "A simple datepicker for ember.js without any external dependencies.",
   "directories": {
     "doc": "doc",
