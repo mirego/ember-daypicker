@@ -14,7 +14,6 @@ const {
 
 export default Component.extend(DocumentEvent, {
   classNames: ['en-day-picker-wrapper'],
-  classNameBindings: ['isDisabled:is-disabled'],
   documentEvents: ['click'],
 
   onDocumentClick (e) {
@@ -22,8 +21,6 @@ export default Component.extend(DocumentEvent, {
       this.set('isFocused', false)
     }
   },
-
-  isDisabled: false,
 
   isFocused: false,
   format: "MMM D",
