@@ -20,10 +20,20 @@ export default Ember.Component.extend(KeyboardHandler, {
   date: moment(),
   today: moment(),
 
-  month: computed('date', {
+  /* activeDate controls the month and the
+   * year that is displayed
+  */
+
+  activeDate: computed('date', {
+    get () {
+      return get(this, 'date')
+    }
+  }),
+
+  month: computed('activeDate', {
     get () {
       let moments = Constants.months
-      let index = get(this, 'date').month()
+      let index = get(this, 'activeDate').month()
 
       return {
         name: moments[index],
@@ -32,9 +42,9 @@ export default Ember.Component.extend(KeyboardHandler, {
     }
   }),
 
-  year: computed('date', {
+  year: computed('activeDate', {
     get () {
-      return get(this, 'date').year()
+      return get(this, 'activeDate').year()
     }
   }),
 
@@ -113,20 +123,22 @@ export default Ember.Component.extend(KeyboardHandler, {
     },
 
     nextMonth () {
-      let date = get(this, 'date')
+      let date = get(this, 'activeDate')
       let nextMonth = date.clone().add(1, 'month').startOf('month')
 
-      this.set('date', nextMonth)
+      this.set('activeDate', nextMonth)
+
       run.next(() => {
         this.focusSelected()
       })
     },
 
     previousMonth () {
-      let date = get(this, 'date')
+      let date = get(this, 'activeDate')
       let previousMonth = date.clone().subtract(1, 'month').startOf('month')
 
-      this.set('date', previousMonth)
+      this.set('activeDate', previousMonth)
+
       run.next(() => {
         this.focusSelected()
       })

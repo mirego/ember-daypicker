@@ -1,9 +1,6 @@
 import Ember from 'ember';
 
-export function isThisDay(params, hash) {
-  let day = hash.day
-  let date = hash.date
-
+export function isThisDay(params, { day, date }) {
   return day.isSame(date, 'day')
 }
 

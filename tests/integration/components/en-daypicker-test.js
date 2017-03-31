@@ -28,6 +28,9 @@ test('it renders with the initial date value', function(assert) {
     .render(hbs`{{en-daypicker 
               date=nextMonth}}`);
 
+  console.log(daypicker.month)
+  console.log(nextMonth)
+
   assert.equal(daypicker.month, nextMonth.format("MMMM"))
   assert.equal(daypicker.year, nextMonth.format("YYYY"))
 });
