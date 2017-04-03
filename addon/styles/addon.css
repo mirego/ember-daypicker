@@ -179,9 +179,10 @@ input[type="text"].en-daypicker-input:hover {
 
 .en-daypicker-day.is-disabled {
   opacity: .5;
-  background-color: #fffaf6;
+  background-color: #fdfeff;
   user-select: none;
   pointer-events: none;
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,.05) 2px, rgba(0,0,0,.05) 4px);
 }
 
 .en-daypicker-day.is-disabled:hover {
@@ -190,7 +191,6 @@ input[type="text"].en-daypicker-input:hover {
 
 .en-daypicker-day.is-today {
   background-color: white;
-  background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,.05) 2px, rgba(0,0,0,.05) 4px);
   color: black;
   font-weight: 600;
   -webkit-font-smoothing: antialiased;
@@ -206,20 +206,26 @@ input[type="text"].en-daypicker-input:hover {
 .en-daypicker-day >
 .en-daypicker-day-text {
   display: inline-block;
-  padding: 3px 6px;
+  padding: 1px 4px;
   border-radius: 999em;
+  font-size: 12px;
+  font-weight: 400;
+  border: 1px solid transparent;
 }
 
 .en-daypicker-day.is-today >
 .en-daypicker-day-text {
-  background: #434c58;
-  color: white;
+  border-color: #434c58;
+  color: #434c58;
+  font-weight: 600;
 }
 
 .en-daypicker-day.is-selected >
 .en-daypicker-day-text {
-  background: #4285f4;
+  border-color: #4285f4;
+  background-color: #4285f4;
   color: white;
+  font-weight: 600;
 }
 
 .en-daypicker-year-chooser {
