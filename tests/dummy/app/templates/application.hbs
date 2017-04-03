@@ -4,8 +4,8 @@
 
   <div class="measure lh-copy">
     <p>
-      ember-daypicker is a simple datepicker component for ember.js. It's built for ember
-      using moment.js. It also basic keyboard support.
+      ember-daypicker is a simple datepicker component for ember.js. It's built using moment.js; there are no
+      external datepicker libraries. There's basic keyboard support, too.
     </p>
 
     <p>
@@ -14,7 +14,6 @@
 
     <div>
       {{en-daypicker-input
-        isFocused=true
         on-select=(action "onSelect")
         format="MMM D, YYYY"
         placeholder="Select a date"
