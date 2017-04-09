@@ -20,6 +20,7 @@ You get a component `en-daypicker-input` that be used as such:
   {{en-daypicker-input
     date=date
     on-select=(action 'didSelectDate')
+  }}
 ```
 
 It uses moment.js everywhere, so you should pass in a moment object as the `date` attr,

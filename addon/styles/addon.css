@@ -32,6 +32,16 @@ abbr {
   box-shadow: 0 1px 0 1px #F7F7F7;
 }
 
+.en-day-picker.from-right {
+  left: auto;
+  right: 0;
+}
+
+.en-day-picker.from-bottom {
+  top: auto;
+  bottom: 37.5px;
+}
+
 .en-daypicker-meta {
   user-select: none;
   display: inline-block;
@@ -211,6 +221,13 @@ input[type="text"].en-daypicker-input:hover {
   font-size: 12px;
   font-weight: 400;
   border: 1px solid transparent;
+}
+
+.en-daypicker-day:hover >
+.en-daypicker-day-text {
+  border-color: #4285f4;
+  color: #4285f4;
+  font-weight: 600;
 }
 
 .en-daypicker-day.is-today >

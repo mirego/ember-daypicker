@@ -6,21 +6,27 @@ const {
   get,
   set,
   computed,
+  Component,
   getProperties,
   run
 } = Em
 
-export default Ember.Component.extend(KeyboardHandler, {
+export default Component.extend(KeyboardHandler, {
   classNames: ['en-day-picker'],
+  classNameBindings: ['positionFromRight:from-right', 'positionFromBottom:from-bottom'],
   attributeBindings: ['role'],
   role: 'widget',
+
+  positionFromBottom: false,
+  positionFromRight: false,
 
   defaultFormat: Constants.defaultFormat,
 
   date: moment(),
   today: moment(),
 
-  /* activeDate controls the month and the
+  /*
+   * activeDate controls the month and the
    * year that is displayed
   */
 
@@ -114,6 +120,25 @@ export default Ember.Component.extend(KeyboardHandler, {
   },
 
   weekDays: Constants.weekdays,
+
+  didInsertElement () {
+    run.scheduleOnce('afterRender', () => {
+      this.repositionElement()
+    })
+  },
+
+  repositionElement () {
+    let { right, top } = this.element.getBoundingClientRect()
+    let { innerWidth, innerHeight } = window
+
+    if (innerWidth - right < 150) {
+      set(this, 'positionFromRight', true)
+    }
+
+    if (innerHeight - top < 150) {
+      set(this, 'positionFromBottom', true)
+    }
+  },
 
   actions: {
     changeYear (year) {
