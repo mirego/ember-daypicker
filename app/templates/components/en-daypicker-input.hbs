@@ -1,9 +1,14 @@
+{{#if label}}
+  <label for={{uid}} onclick={{action "focus"}}>
+    {{label}}
+  </label>
+{{/if}}
+
 <div class="en-daypicker-input-wrapper">
   <input
     value={{en-date-format date=date format=format}}
-    readonly
     placeholder={{placeholder}}
-    id="en-daypicker-input"
+    id={{uid}}
     class="en-daypicker-input"
     type="text"
     name="daypicker"

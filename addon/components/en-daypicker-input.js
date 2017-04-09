@@ -9,12 +9,17 @@ const {
   computed,
   getProperties,
   isEmpty,
-  run
+  run,
+  guidFor
 } = Em
 
 export default Component.extend(DocumentEvent, {
   classNames: ['en-day-picker-wrapper'],
   documentEvents: ['click'],
+
+  uid: computed(function () {
+    return `el-${guidFor(this)}`
+  }),
 
   onDocumentClick (e) {
     if (isOutsideClick(this.element, e.target)) {
