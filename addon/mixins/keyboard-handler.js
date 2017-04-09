@@ -84,8 +84,6 @@ export default Mixin.create({
 
   focusOn (day) {
     const formatted = day.format(Constants.defaultFormat)
-
-    const dayDivs = this.$('.en-daypicker-day:not(.is-disabled)')
     const dayDiv = this.$(`.en-daypicker-day[aria-label="${formatted}"]`)
 
     if (dayDiv && !dayDiv.hasClass('is-disabled')) {
