@@ -122,8 +122,11 @@ export default Component.extend(KeyboardHandler, {
   weekDays: Constants.weekdays,
 
   didInsertElement () {
+    this._super(...arguments)
+
     run.scheduleOnce('afterRender', () => {
       this.repositionElement()
+      this.focusSelected()
     })
   },
 

@@ -1,4 +1,5 @@
 import { moduleForComponent, test } from 'ember-qunit';
+import wait from 'ember-test-helpers/wait';
 import hbs from 'htmlbars-inline-precompile';
 
 const { run } = Em
@@ -22,7 +23,9 @@ test("it shows the datepicker when the input gets focus", function (assert) {
     this.$('input').focus()
   })
 
-  assert.equal($('.en-day-picker').length, 1, "has datepicker when input is focused")
+  return wait().then(() => {
+    assert.equal($('.en-day-picker').length, 1, "has datepicker when input is focused")
+  })
 })
 
 test("the date has MMM D format by default", function (assert) {

@@ -4,36 +4,30 @@ import Constants from 'ember-day/utils/constants';
 const { Mixin, run } = Em
 
 export default Mixin.create({
-  didInsertElement () {
-    this.focusSelected()
-  },
-
   focusSelected () {
     const selected = this.$('.is-selected')
 
     if (selected) {
-      run(() => {
-        selected.focus()
-      })
+      run.next(() => selected.focus())
     }
   },
 
   keyDown (ev) {
-    run(() => {
-      this.handleKeyDown(ev)
-    })
+    run.later(() => this.handleKeyDown(ev), 1)
   },
 
   handleKeyDown (ev) {
-    const focused = this.$('.en-daypicker-day:focus')
+    const focused = $('.en-daypicker-day:focus')
+    const selected = $('.en-daypicker-day.is-selected')
+
+    let el = focused
 
     if (!focused || !focused.length) {
-      console.warn('[en-daypicker] Could not find the focused day')
-      return
+      el = selected
     }
 
     const key   = ev.which || ev.keyCode
-    const label = focused.attr('aria-label')
+    const label = el.attr('aria-label')
     const day   = moment(label, Constants.defaultFormat)
 
     switch (key) {
@@ -88,7 +82,10 @@ export default Mixin.create({
 
     if (dayDiv && !dayDiv.hasClass('is-disabled')) {
       dayDiv.focus()
-      this.sendAction('on-focus', formatted)
+
+      if (this.attrs['on-focus']) {
+        this.attrs['on-focus'](formatted)
+      }
     }
   },
 

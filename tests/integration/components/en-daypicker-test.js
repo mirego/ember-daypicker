@@ -1,5 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import wait from 'ember-test-helpers/wait';
 import Constants from 'ember-day/utils/constants'
 
 import daypicker from '../../pages/en-daypicker'
@@ -27,9 +28,6 @@ test('it renders with the initial date value', function(assert) {
   daypicker
     .render(hbs`{{en-daypicker 
               date=nextMonth}}`);
-
-  console.log(daypicker.month)
-  console.log(nextMonth)
 
   assert.equal(daypicker.month, nextMonth.format("MMMM"))
   assert.equal(daypicker.year, nextMonth.format("YYYY"))
@@ -122,6 +120,7 @@ test('when user hits next, it goes to the next date', function(assert) {
               on-focus=(action "on-focus")}}`);
 
   daypicker.days(0).next()
+  return wait()
 });
 
 test('when user hits prev, it goes to the previous date', function(assert) {
@@ -219,7 +218,6 @@ test("it can disable dates before a given minDate", function (assert) {
 
   this.set('today', today)
   this.set('nextWeek', nextWeek)
-  console.log(nextWeek)
 
   this.render(hbs`{{en-daypicker
               minDate=nextWeek
