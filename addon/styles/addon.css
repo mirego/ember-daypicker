@@ -47,7 +47,7 @@ abbr {
   display: inline-block;
   width: 100%;
   padding: 0;
-  background-color: transparent;
+  background-color: #f8f9fa;
   border: 1px solid #e6e6e6;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -154,7 +154,7 @@ input[type="text"].en-daypicker-input:hover {
 .en-daypicker-day,
 .en-daypicker-header-day {
   display: table-cell;
-  padding: .75em .5em;
+  padding: .5em .35em;
   text-align: center;
   vertical-align: middle;
 }
@@ -178,8 +178,7 @@ input[type="text"].en-daypicker-input:hover {
 
 .en-daypicker-day:hover {
   cursor: pointer;
-  background-color: rgba(66, 133, 244, .05);
-  color: #4285f4;
+  background-color: #f8f9fa
 }
 
 .en-daypicker-day:active {
@@ -192,7 +191,7 @@ input[type="text"].en-daypicker-input:hover {
   background-color: #fdfeff;
   user-select: none;
   pointer-events: none;
-  background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,.05) 2px, rgba(0,0,0,.05) 4px);
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 1px, rgba(0,0,0,.05) 1px, rgba(0,0,0,.05) 2px);
 }
 
 .en-daypicker-day.is-disabled:hover {
@@ -216,7 +215,7 @@ input[type="text"].en-daypicker-input:hover {
 .en-daypicker-day >
 .en-daypicker-day-text {
   display: inline-block;
-  padding: 1px 4px;
+  padding: 1px 3px;
   border-radius: 999em;
   font-size: 12px;
   font-weight: 400;
@@ -225,15 +224,8 @@ input[type="text"].en-daypicker-input:hover {
 
 .en-daypicker-day:hover >
 .en-daypicker-day-text {
-  border-color: #4285f4;
-  color: #4285f4;
-  font-weight: 600;
-}
-
-.en-daypicker-day:focus >
-.en-daypicker-day-text {
-  border-color: #4285f4;
-  color: #4285f4;
+  background-color: #434c58;
+  color: white;
   font-weight: 600;
 }
 
@@ -244,8 +236,14 @@ input[type="text"].en-daypicker-input:hover {
   font-weight: 600;
 }
 
-.en-daypicker-day.is-selected >
+.en-daypicker-day.is-today:hover >
 .en-daypicker-day-text {
+  color: white;
+  font-weight: 600;
+}
+
+.en-daypicker-day.is-selected > .en-daypicker-day-text,
+.en-daypicker-day:focus > .en-daypicker-day-text {
   border-color: #4285f4;
   background-color: #4285f4;
   color: white;
