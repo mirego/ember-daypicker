@@ -1,3 +1,4 @@
+import { find, focus } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import wait from 'ember-test-helpers/wait';
 import hbs from 'htmlbars-inline-precompile';
@@ -19,8 +20,8 @@ test("it shows the datepicker when the input gets focus", function (assert) {
 
   assert.equal($('.en-day-picker').length, 0, "doesn't have datepicker by default")
 
-  run(() => {
-    this.$('input').focus()
+  run(async () => {
+    await focus('input')
   })
 
   return wait().then(() => {
@@ -37,7 +38,7 @@ test("the date has MMM D format by default", function (assert) {
               date=today
               on-select=(action "on-select")}}`);
 
-  assert.equal(this.$('input').val(), today.format("MMM D"))
+  assert.equal(find('input').value, today.format("MMM D"))
 })
 
 test("the date works with other formats", function (assert) {
@@ -53,17 +54,17 @@ test("the date works with other formats", function (assert) {
               format=format
               on-select=(action "on-select")}}`);
 
-  assert.equal(this.$('input').val(), today.format(format))
+  assert.equal(find('input').value, today.format(format))
 
   format = "X"
   this.set('format', format)
 
-  assert.equal(this.$('input').val(), today.format(format))
+  assert.equal(find('input').value, today.format(format))
 
   format = "MMM DD, YYYY hh:mm ss Z"
   this.set('format', format)
 
-  assert.equal(this.$('input').val(), today.format(format))
+  assert.equal(find('input').value, today.format(format))
 })
 
 test("placeholder works", function (assert) {
@@ -77,7 +78,7 @@ test("placeholder works", function (assert) {
               placeholder="Choose a date..."
               on-select=(action "on-select")}}`);
 
-  assert.equal(this.$('input').attr('placeholder'), "Choose a date...")
+  assert.equal(find('input').getAttribute('placeholder'), "Choose a date...")
 })
 
 test("on selecting a date, it sends the on-select action", function (assert) {

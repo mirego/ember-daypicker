@@ -51,7 +51,11 @@
     "ember calendar"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.7"
+    "ember-cli-babel": "^5.1.7",
+    "ember-maybe-import-regenerator": "^0.1.6",
+    "ember-native-dom-helpers": "^0.5.2",
+    "ember-native-dom-helpers-codemod": "^0.1.4",
+    "global": "^4.3.2"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
