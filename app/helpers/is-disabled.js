@@ -1,1 +1,1 @@
-export { default, isDisabled } from 'ember-day/helpers/is-disabled';
+export { default, isDisabled } from 'ember-daypicker/helpers/is-disabled';

@@ -1,1 +1,1 @@
-export { default } from 'ember-day/components/en-rangepicker';
+export { default } from 'ember-daypicker/components/en-rangepicker';

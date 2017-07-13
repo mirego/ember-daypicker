@@ -1,6 +1,7 @@
 import Ember from 'ember'
 import Constants from '../utils/constants'
 import KeyboardHandler from '../mixins/keyboard-handler'
+import moment from 'moment'
 
 const {
   get,
@@ -9,7 +10,7 @@ const {
   Component,
   getProperties,
   run
-} = Em
+} = Ember
 
 export default Component.extend(KeyboardHandler, {
   classNames: ['en-day-picker'],

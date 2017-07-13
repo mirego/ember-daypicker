@@ -1,1 +1,1 @@
-export { default } from 'ember-day/utils/is-outside-click';
+export { default } from 'ember-daypicker/utils/is-outside-click';

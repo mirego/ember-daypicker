@@ -1,1 +1,1 @@
-export { default, enDateFormat } from 'ember-day/helpers/en-date-format';
+export { default, enDateFormat } from 'ember-daypicker/helpers/en-date-format';

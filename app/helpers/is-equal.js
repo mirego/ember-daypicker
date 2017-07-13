@@ -1,1 +1,1 @@
-export { default, isEqual } from 'ember-day/helpers/is-equal';
+export { default, isEqual } from 'ember-daypicker/helpers/is-equal';

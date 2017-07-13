@@ -1,1 +1,1 @@
-export { default } from 'ember-day/components/en-daypicker-input';
+export { default } from 'ember-daypicker/components/en-daypicker-input';

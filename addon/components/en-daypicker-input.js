@@ -1,6 +1,7 @@
 import Ember from 'ember';
-import DocumentEvent from 'ember-day/mixins/document-event';
-import isOutsideClick from 'ember-day/utils/is-outside-click';
+import DocumentEvent from 'ember-daypicker/mixins/document-event';
+import isOutsideClick from 'ember-daypicker/utils/is-outside-click';
+import moment from 'moment'
 
 const {
   Component,

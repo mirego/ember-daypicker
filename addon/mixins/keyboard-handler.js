@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import Constants from 'ember-day/utils/constants';
+import Constants from 'ember-daypicker/utils/constants';
+import moment from 'moment'
 
 const { Mixin, run } = Em
 

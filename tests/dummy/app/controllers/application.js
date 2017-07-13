@@ -1,4 +1,5 @@
 import Em from 'ember'
+import moment from 'moment'
 
 export default Em.Controller.extend({
   date: '',

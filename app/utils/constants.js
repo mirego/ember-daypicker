@@ -1,1 +1,1 @@
-export { default } from 'ember-day/utils/constants';
+export { default } from 'ember-daypicker/utils/constants';

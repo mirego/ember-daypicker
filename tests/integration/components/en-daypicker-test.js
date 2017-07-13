@@ -2,7 +2,7 @@ import { click, find } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
-import Constants from 'ember-day/utils/constants'
+import Constants from 'ember-daypicker/utils/constants'
 
 import daypicker from '../../pages/en-daypicker'
 

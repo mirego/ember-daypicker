@@ -1,11 +1,6 @@
-/* jshint node: true */
+/* eslint-env node */
 'use strict';
 
 module.exports = {
-  name: 'ember-day',
-
-  included: function(app) {
-    this._super.included(app);
-    app.import(app.bowerDirectory + '/moment/moment.js');
-  }
+  name: 'ember-daypicker'
 };

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import moment from 'moment'
 
 export function enDateFormat(params, hash) {
   let date = hash.date
