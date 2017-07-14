@@ -14,7 +14,10 @@ export default Component.extend(DocumentEvent, {
   documentEvents: ["click"],
 
   uid: computed(function() {
-    return `el-${this.element.id}`
+    let el = this.element
+    if (!el) return
+
+    return `el-${el.id}`
   }),
 
   onDocumentClick(e) {

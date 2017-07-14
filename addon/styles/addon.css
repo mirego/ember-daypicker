@@ -28,8 +28,9 @@ abbr {
   z-index: 999999999;
   left: 0;
   top: 100%;
+  margin-top: 2px;
   border-radius: 4px;
-  box-shadow: 0 1px 0 1px #F7F7F7;
+  box-shadow: 0 0 3px 1px rgba(#F7F7F7, .8);
 }
 
 .en-day-picker.from-right {
@@ -47,7 +48,7 @@ abbr {
   display: inline-block;
   width: 100%;
   padding: 0;
-  background-color: #f8f9fa;
+  background-color: white;
   border: 1px solid #e6e6e6;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -74,7 +75,7 @@ input[type="text"].en-daypicker-input {
   border-radius: 4px;
   box-sizing: border-box;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 15px;
   padding: 5px 10px;
   line-height: 1.5;
 }
@@ -96,7 +97,6 @@ input[type="text"].en-daypicker-input:hover {
 .en-daypicker-action {
   background: transparent;
   border: none;
-  padding: .5em 1.5em;
 }
 
 .en-daypicker-action:hover {
@@ -110,14 +110,17 @@ input[type="text"].en-daypicker-input:hover {
 
 .en-daypicker-action-prev {
   float: left;
-  border-radius: 0;
-  padding: .5em;
 }
 
 .en-daypicker-action-next {
   float: right;
+}
+
+.en-daypicker-action-prev,
+.en-daypicker-action-next {
+  color: #535c6b;
   border-radius: 0;
-  padding: .5em;
+  padding: .8em;
 }
 
 .en-daypicker-current-month {
@@ -151,10 +154,14 @@ input[type="text"].en-daypicker-input:hover {
   padding: 6px;
 }
 
+.en-daypicker-header {
+  background: #f8f9fa;
+}
+
 .en-daypicker-day,
 .en-daypicker-header-day {
   display: table-cell;
-  padding: .5em .35em;
+  padding: .75em .5em;
   text-align: center;
   vertical-align: middle;
 }
@@ -164,10 +171,17 @@ input[type="text"].en-daypicker-input:hover {
   font-weight: 500;
 }
 
+.en-daypicker-header-day abbr {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+}
+
 .en-daypicker-day {
-  transition: background-color .25s ease-in-out;
+  transition: background-color .025s ease-in-out;
   font-size: 13px;
-  border: 1px solid #e9ecf1;
+  border: 1px solid #f0f3f7;
   color: rgba(0, 0, 0, 0.8);
   border-radius: 1px;
 }
@@ -187,11 +201,10 @@ input[type="text"].en-daypicker-input:hover {
 }
 
 .en-daypicker-day.is-disabled {
-  opacity: .5;
+  opacity: .25;
   background-color: #fdfeff;
   user-select: none;
   pointer-events: none;
-  background-image: repeating-linear-gradient(45deg, transparent, transparent 1px, rgba(0,0,0,.05) 1px, rgba(0,0,0,.05) 2px);
 }
 
 .en-daypicker-day.is-disabled:hover {
@@ -212,38 +225,24 @@ input[type="text"].en-daypicker-input:hover {
   -webkit-font-smoothing: antialiased;
 }
 
-.en-daypicker-day >
-.en-daypicker-day-text {
-  display: inline-block;
-  padding: 1px 3px;
-  border-radius: 999em;
-  font-size: 12px;
-  font-weight: 400;
-  border: 1px solid transparent;
-}
-
-.en-daypicker-day:hover >
-.en-daypicker-day-text {
+.en-daypicker-day:hover {
   background-color: #434c58;
   color: white;
   font-weight: 600;
 }
 
-.en-daypicker-day.is-today >
-.en-daypicker-day-text {
-  border-color: #434c58;
-  color: #434c58;
+.en-daypicker-day.is-today {
+  color: #e25e2c;
   font-weight: 600;
 }
 
-.en-daypicker-day.is-today:hover >
-.en-daypicker-day-text {
+.en-daypicker-day.is-today:hover {
   color: white;
   font-weight: 600;
 }
 
-.en-daypicker-day.is-selected > .en-daypicker-day-text,
-.en-daypicker-day:focus > .en-daypicker-day-text {
+.en-daypicker-day.is-selected,
+.en-daypicker-day:focus {
   border-color: #4285f4;
   background-color: #4285f4;
   color: white;

@@ -31,9 +31,7 @@
                 {{if (is-disabled day=day disabler=disableFn month=month max=maxDate min=minDate) 'is-disabled'}}
                 {{if (is-this-day day=day date=date) 'is-selected'}}
                 {{if (is-this-day day=day date=today) 'is-today'}}">
-            <span class="en-daypicker-day-text">
-              {{en-date-format date=day}}
-            </span>
+            {{en-date-format date=day}}
           </div>
         {{/each}}
       </div>
