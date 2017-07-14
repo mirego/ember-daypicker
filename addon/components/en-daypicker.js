@@ -1,22 +1,19 @@
-import Ember from 'ember'
-import Constants from '../utils/constants'
-import KeyboardHandler from '../mixins/keyboard-handler'
-import moment from 'moment'
+import Component from "@ember/component"
+import { get, set, getProperties, computed } from "@ember/object"
+import { run } from "@ember/runloop"
+import moment from "moment"
 
-const {
-  get,
-  set,
-  computed,
-  Component,
-  getProperties,
-  run
-} = Ember
+import Constants from "../utils/constants"
+import KeyboardHandler from "../mixins/keyboard-handler"
 
 export default Component.extend(KeyboardHandler, {
-  classNames: ['en-day-picker'],
-  classNameBindings: ['positionFromRight:from-right', 'positionFromBottom:from-bottom'],
-  attributeBindings: ['role'],
-  role: 'widget',
+  classNames: ["en-day-picker"],
+  classNameBindings: [
+    "positionFromRight:from-right",
+    "positionFromBottom:from-bottom"
+  ],
+  attributeBindings: ["role"],
+  role: "widget",
 
   positionFromBottom: false,
   positionFromRight: false,
@@ -31,16 +28,16 @@ export default Component.extend(KeyboardHandler, {
    * year that is displayed
   */
 
-  activeDate: computed('date', {
-    get () {
-      return get(this, 'date')
+  activeDate: computed("date", {
+    get() {
+      return get(this, "date")
     }
   }),
 
-  month: computed('activeDate', {
-    get () {
+  month: computed("activeDate", {
+    get() {
       let moments = Constants.months
-      let index = get(this, 'activeDate').month()
+      let index = get(this, "activeDate").month()
 
       return {
         name: moments[index],
@@ -49,21 +46,21 @@ export default Component.extend(KeyboardHandler, {
     }
   }),
 
-  year: computed('activeDate', {
-    get () {
-      return get(this, 'activeDate').year()
+  year: computed("activeDate", {
+    get() {
+      return get(this, "activeDate").year()
     }
   }),
 
-  firstDay: computed('month', {
-    get () {
-      let date = get(this, 'date')
-      return date.startOf('month')
+  firstDay: computed("month", {
+    get() {
+      let date = get(this, "date")
+      return date.startOf("month")
     }
   }),
 
-  weeksArray: computed('month', function () {
-    let { date, month, year } = getProperties(this, 'date', 'month', 'year' )
+  weeksArray: computed("month", function() {
+    let { date, month, year } = getProperties(this, "date", "month", "year")
     let daysInMonth = date.daysInMonth()
 
     let days = []
@@ -92,7 +89,7 @@ export default Component.extend(KeyboardHandler, {
 
     for (let i = 7 - firstWeek.length; i > 0; i--) {
       let firstDay = firstWeek[0].clone()
-      let previousDay = firstDay.subtract(1, 'day')
+      let previousDay = firstDay.subtract(1, "day")
 
       firstWeek.unshift(previousDay)
     }
@@ -101,7 +98,7 @@ export default Component.extend(KeyboardHandler, {
 
     for (let i = lastWeek.length; i < 7; i++) {
       let lastDay = lastWeek[lastWeek.length - 1].clone()
-      let nextDay = lastDay.add(1, 'day')
+      let nextDay = lastDay.add(1, "day")
 
       lastWeek.push(nextDay)
     }
@@ -109,78 +106,78 @@ export default Component.extend(KeyboardHandler, {
     return weeks
   }),
 
-  init () {
+  init() {
     this._super(...arguments)
     this._verifyMoment()
   },
 
-  _verifyMoment () {
+  _verifyMoment() {
     if (!moment) {
-      throw('[en-daypicker] moment.js could not be found')
+      throw "[en-daypicker] moment.js could not be found"
     }
   },
 
   weekDays: Constants.weekdays,
 
-  didInsertElement () {
+  didInsertElement() {
     this._super(...arguments)
 
-    run.scheduleOnce('afterRender', () => {
+    run.scheduleOnce("afterRender", () => {
       this.repositionElement()
       this.focusSelected()
     })
   },
 
-  repositionElement () {
+  repositionElement() {
     let { right, top } = this.element.getBoundingClientRect()
     let { innerWidth, innerHeight } = window
 
     if (innerWidth - right < 150) {
-      set(this, 'positionFromRight', true)
+      set(this, "positionFromRight", true)
     }
 
     if (innerHeight - top < 150) {
-      set(this, 'positionFromBottom', true)
+      set(this, "positionFromBottom", true)
     }
   },
 
   actions: {
-    changeYear (year) {
-      let date = get(this, 'date')
+    changeYear(year) {
+      let date = get(this, "date")
       let next = date.clone().year(year)
-      set(this, 'date', next)
+      set(this, "date", next)
     },
 
-    nextMonth () {
-      let date = get(this, 'activeDate')
-      let nextMonth = date.clone().add(1, 'month').startOf('month')
+    nextMonth() {
+      let date = get(this, "activeDate")
+      let nextMonth = date.clone().add(1, "month").startOf("month")
 
-      this.set('activeDate', nextMonth)
+      this.set("activeDate", nextMonth)
 
       run.next(() => {
         this.focusSelected()
       })
     },
 
-    previousMonth () {
-      let date = get(this, 'activeDate')
-      let previousMonth = date.clone().subtract(1, 'month').startOf('month')
+    previousMonth() {
+      let date = get(this, "activeDate")
+      let previousMonth = date.clone().subtract(1, "month").startOf("month")
 
-      this.set('activeDate', previousMonth)
+      this.set("activeDate", previousMonth)
 
       run.next(() => {
         this.focusSelected()
       })
     },
 
-    didSelectDate (day) {
-      const { minDate, maxDate } = getProperties(this, 'minDate', 'maxDate')
+    didSelectDate(day) {
+      const { minDate, maxDate } = getProperties(this, "minDate", "maxDate")
 
       if (minDate && day.isBefore(minDate)) return
       if (maxDate && day.isAfter(maxDate)) return
 
       this.focusSelected()
-      this.attrs['on-select'](day)
+      this.attrs["on-select"](day)
     }
   }
-});
+})

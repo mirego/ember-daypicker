@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper } from "@ember/component/helper"
 
 export function isDisabled(params, hash) {
   let { day, disabler, month, max, min } = hash
@@ -30,4 +30,4 @@ export function isDisabled(params, hash) {
   return false
 }
 
-export default Ember.Helper.helper(isDisabled);
+export default helper(isDisabled)

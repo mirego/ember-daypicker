@@ -1,14 +1,10 @@
-import Ember from 'ember';
-
-const {
-  Component,
-  computed
-} = Ember
+import Component from "@ember/component"
+import { computed } from "@ember/object"
 
 export default Component.extend({
   isChangingYear: false,
 
-  years: computed('year', function () {
+  years: computed("year", function() {
     let arr = []
     let i = 1950
 
@@ -21,8 +17,8 @@ export default Component.extend({
   }),
 
   actions: {
-    toggleChangingYear () {
-      this.toggleProperty('isChangingYear')
+    toggleChangingYear() {
+      this.toggleProperty("isChangingYear")
     }
   }
-});
+})

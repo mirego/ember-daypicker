@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import { helper } from "@ember/component/helper"
 
 export function isThisDay(params, { day, date }) {
-  return day.isSame(date, 'day')
+  return day.isSame(date, "day")
 }
 
-export default Ember.Helper.helper(isThisDay);
+export default helper(isThisDay)

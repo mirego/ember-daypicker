@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import Ember from 'ember'
+import { helper } from "@ember/component/helper"
 
 export function isEqual([a, b]) {
   return Ember.isEqual(a, b)
 }
 
-export default Ember.Helper.helper(isEqual);
+export default helper(isEqual)
