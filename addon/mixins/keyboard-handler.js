@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Constants from 'ember-daypicker/utils/constants';
 import moment from 'moment'
 
-const { Mixin, run } = Em
+const { Mixin, run, $ } = Ember
 
 export default Mixin.create({
   focusSelected () {

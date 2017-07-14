@@ -1,11 +1,9 @@
 import {
   isVisible,
   attribute,
-  property,
   collection,
   create,
   clickable,
-  visitable,
   triggerable,
   text
 } from 'ember-cli-page-object';

@@ -2,13 +2,10 @@ import Ember from 'ember';
 
 const {
   get,
-  set,
-  computed,
-  inject,
   run,
   Logger: { warn },
   Mixin
-} = Em
+} = Ember
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 

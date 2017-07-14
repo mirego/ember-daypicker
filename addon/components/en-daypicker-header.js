@@ -1,10 +1,9 @@
 import Ember from 'ember';
 
 const {
-  get, set,
   Component,
   computed
-} = Em
+} = Ember
 
 export default Component.extend({
   isChangingYear: false,

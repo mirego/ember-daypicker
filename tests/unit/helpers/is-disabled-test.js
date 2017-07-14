@@ -1,5 +1,6 @@
 import { isDisabled } from '../../../helpers/is-disabled';
 import { module, test } from 'qunit';
+import moment from 'moment';
 
 module('Unit | Helper | is disabled');
 

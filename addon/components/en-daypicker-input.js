@@ -6,13 +6,12 @@ import moment from 'moment'
 const {
   Component,
   get,
-  set,
   computed,
-  getProperties,
   isEmpty,
   run,
-  guidFor
-} = Em
+  guidFor,
+  Logger: { warn }
+} = Ember
 
 export default Component.extend(DocumentEvent, {
   classNames: ['en-day-picker-wrapper'],
@@ -38,7 +37,7 @@ export default Component.extend(DocumentEvent, {
       return moment()
 
     } else if (!moment.isMoment(date) || !date.isValid()) {
-      console.warn(`[ember-day] You need to pass in a valid moment object.
+      warn(`[ember-day] You need to pass in a valid moment object.
 You passed in ${date}, which is invalid, so we're defaulting to today's date`)
       return moment()
 

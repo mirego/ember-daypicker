@@ -24,12 +24,10 @@ export default Em.Controller.extend({
 
   actions: {
     onSelect (date) {
-      console.log('Got on-select')
       this.set('date', date)
     },
 
     onFocus () {
-      console.log('Got on-focus')
     }
   }
 })

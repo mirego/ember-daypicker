@@ -1,5 +1,6 @@
 import { isThisDay } from '../../../helpers/is-this-day';
 import { module, test } from 'qunit';
+import moment from 'moment';
 
 module('Unit | Helper | is this day');
 

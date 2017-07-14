@@ -1,9 +1,11 @@
+import Ember from 'ember';
+import moment from 'moment';
 import { find, focus } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import wait from 'ember-test-helpers/wait';
 import hbs from 'htmlbars-inline-precompile';
 
-const { run } = Em
+const { run, $ } = Ember
 
 moduleForComponent('en-daypicker-input', 'Integration | Component | en daypicker input', {
   integration: true

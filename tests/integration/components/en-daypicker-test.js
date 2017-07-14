@@ -1,4 +1,7 @@
-import { click, find } from 'ember-native-dom-helpers';
+import Ember from 'ember';
+import moment from 'moment';
+import { click, find, findAll, triggerEvent } from 'ember-native-dom-helpers';
+
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
@@ -6,7 +9,7 @@ import Constants from 'ember-daypicker/utils/constants'
 
 import daypicker from '../../pages/en-daypicker'
 
-const { run, run: { later }} = Em
+const { run } = Ember
 
 moduleForComponent('en-daypicker', 'Integration | Component | en daypicker', {
   integration: true,
@@ -109,7 +112,7 @@ test('when user hits next, it goes to the next date', function(assert) {
   let today = m("Sep 15, 2016")
 
   this.set('today', today)
-  this.on('on-select', _ => null)
+  this.on('on-select', () => null)
 
   this.on('on-focus', (day) => {
     assert.ok(moment(day).isSame(m("Sep 16, 2016")), "got the next day to focus")
@@ -121,6 +124,7 @@ test('when user hits next, it goes to the next date', function(assert) {
               on-focus=(action "on-focus")}}`);
 
   daypicker.days(0).next()
+  
   return wait()
 });
 
@@ -130,7 +134,7 @@ test('when user hits prev, it goes to the previous date', function(assert) {
   let today = m("Sep 15, 2016")
 
   this.set('today', today)
-  this.on('on-select', _ => null)
+  this.on('on-select', () => null)
 
   this.on('on-focus', (day) => {
     assert.ok(moment(day).isSame(m("Sep 14, 2016")), "got the pevious day to focus")
@@ -150,7 +154,7 @@ test('when user hits up, it goes to the previous week', function(assert) {
   let today = m("Sep 15, 2016")
 
   this.set('today', today)
-  this.on('on-select', _ => null)
+  this.on('on-select', () => null)
 
   this.on('on-focus', (day) => {
     assert.ok(moment(day).isSame(m("Sep 8, 2016"), "got the pevious week to focus"))
@@ -170,7 +174,7 @@ test('when user hits down, it goes to the next week', function(assert) {
   let today = m("Sep 15, 2016")
 
   this.set('today', today)
-  this.on('on-select', _ => null)
+  this.on('on-select', () => null)
 
   this.on('on-focus', (day) => {
     assert.ok(moment(day).isSame(m("Sep 22, 2016"), "got the next week to focus"))
@@ -188,7 +192,7 @@ test('when user hits down, it goes to the next week', function(assert) {
  * Disabling days works
  */
 
-test("it can disable dates after a given maxDate", function (assert) {
+test("it can disable dates after a given maxDate", async function(assert) {
   let today = m("Sep 1, 2016")
   let nextWeek = today.clone().add(6, 'days')
 
@@ -199,17 +203,15 @@ test("it can disable dates after a given maxDate", function (assert) {
               maxDate=nextWeek
               date=today}}`);
 
-  let active = this.$('.en-daypicker-day:not(.is-disabled)')
+  let active = findAll('.en-daypicker-day:not(.is-disabled)')
   assert.equal(active.length, 7, "has 7 active days")
 
   let firstDayAfterMax = this.$('.en-daypicker-day[aria-label="Sep 08, 2016"]')
   assert.ok(firstDayAfterMax.hasClass('is-disabled'), "first day after max has disabled class")
 
-  run(async () => {
-    await click('.en-daypicker-action-next')
-  })
+  await click('.en-daypicker-action-next')
 
-  active = this.$('.en-daypicker-day:not(.is-disabled)')
+  active = findAll('.en-daypicker-day:not(.is-disabled)')
   assert.equal(active.length, 0, "has no active days in the next month")
 })
 
@@ -224,14 +226,14 @@ test("it can disable dates before a given minDate", function (assert) {
               minDate=nextWeek
               date=today}}`);
 
-  let active = this.$('.en-daypicker-day:not(.is-disabled)')
+  let active = findAll('.en-daypicker-day:not(.is-disabled)')
   assert.equal(active.length, 18, "has 18 active days")
 
-  let lastDay = this.$('.en-daypicker-day[aria-label="Sep 12, 2016"]')
-  assert.ok(lastDay.hasClass('is-disabled'), "last minDate has the disabled class")
+  let lastDay = find('.en-daypicker-day[aria-label="Sep 12, 2016"]')
+  assert.ok(lastDay.classList.contains('is-disabled'), "last minDate has the disabled class")
 
-  let firstDayAfterMin= this.$('.en-daypicker-day[aria-label="Sep 13, 2016"]')
-  assert.notOk(firstDayAfterMin.hasClass('is-disabled'), "first day after max does not have disabled class")
+  let firstDayAfterMin= find('.en-daypicker-day[aria-label="Sep 13, 2016"]')
+  assert.notOk(firstDayAfterMin.classList.contains('is-disabled'), "first day after max does not have disabled class")
 })
 
 test("it does not allow selecting disabled dates after max", function (assert) {
@@ -252,13 +254,13 @@ test("it does not allow selecting disabled dates after max", function (assert) {
               date=today
               on-select=(action "on-select")}}`);
 
-  run(async () => {
-    await click('.en-daypicker-day[aria-label="Sep 07, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 08, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 10, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 12, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 15, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 21, 2016"]')
+  run(() => {
+    click('.en-daypicker-day[aria-label="Sep 07, 2016"]')
+    click('.en-daypicker-day[aria-label="Sep 08, 2016"]')
+    click('.en-daypicker-day[aria-label="Sep 10, 2016"]')
+    click('.en-daypicker-day[aria-label="Sep 12, 2016"]')
+    click('.en-daypicker-day[aria-label="Sep 15, 2016"]')
+    click('.en-daypicker-day[aria-label="Sep 21, 2016"]')
   })
 })
 
@@ -280,18 +282,18 @@ test("it does not allow selecting disabled dates before min", function (assert) 
               date=today
               on-select=(action "on-select")}}`);
 
-  run(async () => {
-    await click('.en-daypicker-day[aria-label="Sep 01, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 02, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 03, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 04, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 05, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 06, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 07, 2016"]')
+  run(() => {
+    click('.en-daypicker-day[aria-label="Sep 01, 2016"]')
+    click('.en-daypicker-day[aria-label="Sep 02, 2016"]')
+    click('.en-daypicker-day[aria-label="Sep 03, 2016"]')
+    click('.en-daypicker-day[aria-label="Sep 04, 2016"]')
+    click('.en-daypicker-day[aria-label="Sep 05, 2016"]')
+    click('.en-daypicker-day[aria-label="Sep 06, 2016"]')
+    click('.en-daypicker-day[aria-label="Sep 07, 2016"]')
   })
 })
 
-test("it allows disabling any day", function (assert) {
+test("it allows disabling any day", async function (assert) {
   assert.expect(4)
 
   let today = m("Sep 1, 2016")
@@ -304,19 +306,12 @@ test("it allows disabling any day", function (assert) {
     return date.day() === 6 // Disable Saturdays
   })
 
-  this.on('on-select', (date) => null)
+  this.on('on-select', () => null)
 
   this.render(hbs`{{en-daypicker
               disableFn=disableFn
               date=today
               on-select=(action "on-select")}}`);
-
-  run(async () => {
-    await click('.en-daypicker-day[aria-label="Sep 03, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 10, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 17, 2016"]')
-    await click('.en-daypicker-day[aria-label="Sep 24, 2016"]')
-  })
 
   assert.ok(find('.en-daypicker-day[aria-label="Sep 03, 2016"]').classList.contains("is-disabled"))
   assert.ok(find('.en-daypicker-day[aria-label="Sep 10, 2016"]').classList.contains("is-disabled"))
@@ -324,7 +319,7 @@ test("it allows disabling any day", function (assert) {
   assert.ok(find('.en-daypicker-day[aria-label="Sep 24, 2016"]').classList.contains("is-disabled"))
 })
 
-test("it allows changing year", function (assert) {
+test("it allows changing year", async function (assert) {
   assert.expect(1)
 
   let today = m("Sep 1, 2016")
@@ -339,17 +334,7 @@ test("it allows changing year", function (assert) {
               date=today
               on-select=(action "on-select")}}`);
 
-  run(async () => {
-    await click('.en-daypicker-meta-year')
-    const f = await find('.en-daypicker-meta-year')
-    console.log(f)
-  })
-
-  run(() => {
-    this.$('.en-daypicker-day')
-      .not('.is-disabled')
-      .not('.is-selected')
-      .eq(0)
-      .click()
-  })
+  find('.en-daypicker-meta-year').value = 1960
+  await triggerEvent('.en-daypicker-meta-year', 'change')
+  await click('.en-daypicker-day:nth-child(3)')
 })

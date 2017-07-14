@@ -1,5 +1,6 @@
 import { enDateFormat } from '../../../helpers/en-date-format';
 import { module, test } from 'qunit';
+import moment from 'moment';
 
 module('Unit | Helper | en date format');
 

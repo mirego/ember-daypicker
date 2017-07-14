@@ -1,4 +1,4 @@
-import isOutsideClick from 'dummy/utils/is-outside-click';
+// import isOutsideClick from 'dummy/utils/is-outside-click';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | is outside click');
