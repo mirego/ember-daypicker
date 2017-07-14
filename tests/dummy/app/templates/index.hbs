@@ -1,0 +1,48 @@
+<h5 class="ttu tracked">Basic Usage</h5>
+
+<p>
+  Here's how to use it:
+</p>
+
+{{code-snippet name="default-input.hbs"}}
+
+... here's what the code above renders:
+
+<div class="mt2">
+  {{en-daypicker-input
+    date=application.date
+    format="MMM D, YYYY"
+    placeholder="Select a date"
+    on-select=(action (mut application.date))
+  }}
+</div>
+
+{{#if date}}
+  <p class="bg-near-white pa2">
+    You selected <strong> {{en-date-format date=date format="MMM D, YYYY"}} </strong>.
+  </p>
+{{/if}}
+
+<p>
+  By default, the <code>date</code> is <code>null</code>. You can pass in a <code>date</code> attribute that's a moment object, too.
+  Here's it with the <code>date</code> attribute set to today.
+</p>
+
+<div class="mt2">
+  {{en-daypicker-input
+    date=application.today
+    format="MMM D, YYYY"
+    placeholder="Select a date"
+    on-select=(action (mut application.today))
+  }}
+</div>
+
+<p>
+  When the user selects a date, the <code>on-select</code> action is sent up with the
+  selected date (as a moment.js object).
+</p>
+
+<p>
+  By default, the datepicker is hidden. It's shown when a user clicks on the input.
+  You can have it displayed by default by setting <code>isFocused</code> to <code>true</code>.
+</p>

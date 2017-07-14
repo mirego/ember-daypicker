@@ -1,0 +1,13 @@
+<h5 class="ttu tracked">Formatting Dates</h5>
+
+<p>You can also pass in the <code>format</code> that the date is displayed in By default, it's <code>MMM D</code>.</p>
+<p>Here's an example with the <code>format</code> set to <code>ddd, MMM D, YYYY</code></p>
+
+<div class="mt2">
+  {{en-daypicker-input
+    date=application.today
+    format="ddd MMM D, YYYY"
+    placeholder="Select a date"
+    on-select=(action (mut application.today))
+  }}
+</div>

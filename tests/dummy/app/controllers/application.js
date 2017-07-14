@@ -2,7 +2,8 @@ import Em from 'ember'
 import moment from 'moment'
 
 export default Em.Controller.extend({
-  date: '',
+  date: null,
+  today: moment(),
 
   maxDate: moment().add(1, 'month'),
   minDate: moment().subtract(1, 'month'),

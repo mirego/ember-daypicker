@@ -1,0 +1,32 @@
+<h5 class="ttu tracked">Disabling Dates</h5>
+
+<p class="mt0">
+  Pass in the <code>minDate</code> or <code>maxDate</code> attributes to disable dates before
+  or after a certain date.
+</p>
+
+<p>
+  There's also a <code>disableFn</code> attribute that allows you more control over the days
+  that you want disabled. To use it, pass in a function that accepts a <code>date</code> parameter
+  (again, a moment.js object) and returns true for dates that should be disabled.
+</p>
+
+<p>For example, if you want to disable weekends, you can do it like this:</p>
+
+{{code-snippet name="disable-dates-example.hbs"}}
+
+<p>The <code>disableFn</code> should look like this:</p>
+
+{{code-snippet name="disable-fn-example.hbs"}}
+
+<p>That will do the job. Here's that example in action:</p>
+
+<div>
+  {{en-daypicker-input
+    date=application.date
+    format="MMM D, YYYY"
+    placeholder="Select a date"
+    disableFn=application.disableFn
+    on-select=(action (mut application.date))
+    }}
+</div>

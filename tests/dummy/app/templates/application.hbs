@@ -1,91 +1,27 @@
-<div class="sans-serif mw8 pa4 center">
-  <h6 class="ttu tracked">Introduction</h6>
-  <h1>ember-daypicker</h1>
+<header>
+  {{calendar-logo}}
+  <h1 class="fw9">ember-daypicker</h1>
+</header>
 
-  <div class="measure lh-copy">
-    <p>
-      ember-daypicker is a simple datepicker component for ember.js. It's built using moment.js; there are no
-      external datepicker libraries. There's basic keyboard support, too.
+<div class="header-addendum"></div>
+
+<section class="sans pa4 center container">
+  <nav>
+    {{link-to "Basic Usage" "index"}}
+    {{link-to "Formatting Dates" "formatting-dates"}}
+    {{link-to "Disabling Dates" "disabling-dates"}}
+
+    <a target="_blank" href="https://github.com/swastik/ember-daypicker">
+      View on Github
+    </a>
+  </nav>
+
+  <div class="content lh-copy">
+    <p class="mid-gray f4">
+      ember-daypicker is a datepicker component for ember.js. It's built using moment.js; there are no
+      external datepicker libraries. There's basic keyboard support too.
     </p>
 
-    <p>
-      Here's a simple version of it.
-    </p>
-
-    <div>
-      {{en-daypicker-input
-        on-select=(action "onSelect")
-        format="MMM D, YYYY"
-        placeholder="Select a date"
-        date=date
-        label="Label"
-      }}
-    </div>
-
-    {{#if date}}
-      <p class="bg-black-05 pa2">
-        You selected <strong> {{en-date-format date=date format="MMM D, YYYY"}} </strong>
-      </p>
-    {{/if}}
-
-    <p class="f6 black-50">
-      With the datepicker open, try moving around around with your arrow keys. 
-    </p>
-
-    <p>Here's the code that powers the daypicker above.</p>
-
-    {{code-snippet name="default-input.hbs"}}
-
-    <p>
-      You can pass in a <code>date</code> attribute that's the currently selected date.
-      You can also pass in the <code>format</code> that the date is displayed in By default, it's <code>MMM D</code>.
-    </p>
-
-    <p>
-      When the user selects a date, the <code>on-select</code> action is sent up with the
-      selected date (as a moment.js object).
-    </p>
-
-    <p>
-      By default, the datepicker is hidden. It's shown when a user clicks on the input.
-      You can have it displayed by default by setting <code>isFocused</code> to <code>true</code>.
-    </p>
-
-    <h2 class="mb0">Disabling Dates</h2>
-
-    <p class="mt0">
-      Pass in the <code>minDate</code> or <code>maxDate</code> attributes to disable dates before
-      or after a certain date.
-    </p>
-
-    <p>
-      There's also a <code>disableFn</code> attribute that allows you more control over the days
-      that you want disabled. To use it, pass in a function that accepts a <code>date</code> parameter
-      (again, a moment.js object) and returns true for dates that should be disabled.
-    </p>
-
-    <p>For example, if you want to disable weekends, you can do it like this:</p>
-
-    {{code-snippet name="disable-dates-example.hbs"}}
-
-    <p>The <code>disableFn</code> should look like this:</p>
-
-    {{code-snippet name="disable-fn-example.hbs"}}
-
-    <p>That will do the job. Here's that example in action:</p>
-
-    <div>
-      {{en-daypicker-input
-        on-select=(action "onSelect")
-        format="MMM D, YYYY"
-        placeholder="Select a date"
-        disableFn=disableFn
-        date=date}}
-    </div>
-
-    <h2 class="mb0">Questions? Bugs?</h2>
-    <p class="mt0">Feel free to send in PRs or create an issue if you have a question.</p>
+    {{outlet}}
   </div>
-
-  <h2 class="mb0">Ranges</h2>
-</div>
+</section>

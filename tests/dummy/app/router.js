@@ -7,6 +7,11 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('formatting-dates'),
+  this.route('actions'),
+  this.route('disabling-dates'),
+  this.route('modifiers')
+  this.route('customization')
 });
 
 export default Router;
