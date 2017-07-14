@@ -1,13 +1,9 @@
 machine:
   node:
-    version: 2.5.0
+    version: 6.9.0
 
 dependencies:
   pre:
-    - npm install -g bower
-  override:
-    - npm i
-    - bower i
+    - npm install
   cache_directories:
     - "node_modules"
-    - "bower_components"
