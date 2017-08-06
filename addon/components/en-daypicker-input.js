@@ -32,10 +32,14 @@ export default Component.extend(DocumentEvent, {
   dateFormatted: computed("date", function() {
     let date = get(this, "date")
 
+    if (typeof date === "string") {
+      date = moment(date)
+    }
+
     if (isEmpty(date)) {
       return moment()
     } else if (!moment.isMoment(date) || !date.isValid()) {
-      assert(`[ember-day] You need to pass in a valid moment object.
+      assert(`[ember-daypicker] You need to pass in a valid moment object.
 You passed in ${date}, which is invalid, so we're defaulting to today's date`)
       return moment()
     } else {
