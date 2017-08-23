@@ -9,13 +9,13 @@
 <div class="en-daypicker-month-wrapper">
   <div class="en-daypicker-month">
     <div class="en-daypicker-header">
-      {{#each-in weekDays as |abbr expanded|}}
+      {{#each weekDays as |weekDay|}}
         <div class="en-daypicker-header-day">
-          <abbr title="{{expanded}}">
-            {{abbr}}
+          <abbr title="{{weekDay.fullname}}">
+            {{weekDay.abbr}}
           </abbr>
         </div>
-      {{/each-in}}
+      {{/each}}
     </div>
 
     {{#each weeksArray as |week|}}
