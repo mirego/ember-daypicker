@@ -36,11 +36,11 @@ export default Component.extend(KeyboardHandler, {
 
   month: computed("activeDate", {
     get() {
-      let moments = Constants.months
+      let months = moment.months();
       let index = get(this, "activeDate").month()
 
       return {
-        name: moments[index],
+        name: months[index],
         index: index
       }
     }
@@ -117,7 +117,15 @@ export default Component.extend(KeyboardHandler, {
     }
   },
 
-  weekDays: Constants.weekdays,
+  weekDays: computed(function() {
+    const weekDays = moment.weekdays().map((day, index) => {
+      return {
+        abbr: moment.weekdaysShort()[index],
+        fullname: day
+      }
+    });
+    return weekDays;
+  }),
 
   didInsertElement() {
     this._super(...arguments)
