@@ -49,17 +49,25 @@ You passed in ${date}, which is invalid, so we're defaulting to today's date`)
 
   actions: {
     focus() {
-      run(() => {
-        this.set("isFocused", true)
-        this.attrs["on-focus"]
-      })
+      console.log("@@@@@@sdfdsf@@@@@");
+      console.log(this.get('disabled'));
+      if (!this.get('disabled')) {
+        run(() => {
+          this.set("isFocused", true)
+          this.attrs["on-focus"]
+        })
+      }
     },
 
     didSelect(date) {
-      run(() => {
-        this.set("isFocused", false)
-        this.attrs["on-select"](date)
-      })
+      console.log("@@@@@@@@@@@");
+      console.log(this.get('disabled'));z
+      if (!this.get('disabled')) {
+        run(() => {
+          this.set("isFocused", false)
+          this.attrs["on-select"](date)
+        })
+      }
     }
   }
 })
